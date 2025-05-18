@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Update Quiz</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/bootstrap4/bootstrap.min.css"
+    />
+    <link
+      href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/plugins/OwlCarousel2-2.2.1/animate.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/css-file/main_styles.css" />
+    <link rel="stylesheet" type="text/css" href="/css-file/responsive.css" />
+    <link rel="stylesheet" href="/css-file/createQuiz.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <!-- External resources -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css"
+    />  
+    <link rel="stylesheet" href="/css-file/editQuiz.css">
+    <link rel="stylesheet" href="/css-file/tchrConsole.css">
+
+  </head>
+  <body>
+    <div class="super_container">
+      <!-- Header Section -->
+      <header class="header">
+        <!-- Top Bar -->
+       
+                    <div class="top_bar_login ml-auto">
+                      <div class="login_button">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Header Content -->
+        <div class="header_container">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                  <a href="/tchr/manage-quizzes" style="display: flex; align-items: center; text-decoration: none;  font-size: 30px;">
+                    <i class="fas fa-arrow-left" style="margin: 9px; padding: 10px;"></i>
+                    <!-- <i class="fas fa-arrow-left"></i>  -->
+                  </a>
+                  <img src="/images/R.jpeg" class="uniLogo" alt="UniLogo">
+                  <div class="logo_container">
+                    <a href="#">
+                      <div class="logo_text">Physics<span>Verse</span></div>
+                    </a>
+                  </div>
+
+                <nav class="main_nav_contaner ml-auto">
+                  <ul class="main_nav">
+                  
+                    <li>
+                      <a href="/tchr/quiz" style="display: flex; align-items: center; text-decoration: none;  font-size: 30px;">
+                        <i class="fa fa-home" style="margin-right: 2px; padding: 4px;"></i>
+                      </a>
+                    </li>
+                  </ul>
+
+                 
+                </nav></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="container mt-5 superContainer">
+        <h1 class="text-center fw-bold" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">
+          Edit Quiz
+        </h1>
+        <form action="/tchr/quizedit/<%= quiz._id %>" method="POST" class="row g-3">
+          
+          <!-- Experiment Number -->
+          <div class="col-12 col-md-6">
+            <label class="form-label">Experiment Number:</label>
+            <input type="text" name="exp_no" value="<%= quiz.exp_no %>" readonly required class="form-control">
+          </div>
+      
+          <!-- Experiment Title -->
+          <div class="col-12 col-md-6">
+            <label class="form-label">Experiment Title:</label>
+            <input type="text" name="exp_title" value="<%= quiz.exp_title %>" readonly required class="form-control">
+          </div>
+      
+          <!-- Question Number -->
+          <div class="col-12 col-md-6">
+            <label class="form-label">Question Number:</label>
+            <input type="text" name="question_no" value="<%= quiz.question_no %>" required class="form-control">
+          </div>
+      
+          <!-- Question -->
+          <div class="col-12">
+            <label class="form-label">Question:</label>
+            <input type="text" name="Question" value="<%= quiz.Question %>" required class="form-control">
+          </div>
+      
+          <!-- Options -->
+          <div class="col-12 col-md-6">
+            <label class="form-label">Option 1:</label>
+            <input type="text" name="option1" value="<%= quiz.option1 %>" required class="form-control">
+          </div>
+      
+          <div class="col-12 col-md-6">
+            <label class="form-label">Option 2:</label>
+            <input type="text" name="option2" value="<%= quiz.option2 %>" required class="form-control">
+          </div>
+      
+          <div class="col-12 col-md-6">
+            <label class="form-label">Option 3:</label>
+            <input type="text" name="option3" value="<%= quiz.option3 %>" required class="form-control">
+          </div>
+      
+          <div class="col-12 col-md-6">
+            <label class="form-label">Option 4:</label>
+            <input type="text" name="option4" value="<%= quiz.option4 %>" required class="form-control">
+          </div>
+      
+          <!-- Answer -->
+          <div class="col-12">
+            <label class="form-label">Answer:</label>
+            <input type="text" name="Answer" value="<%= quiz.Answer %>" required class="form-control">
+          </div>
+      
+          <!-- Submit -->
+          <div class="col-12 text-center">
+            <button type="button" onclick="validateCurrentQuestion(event)" class="btn text-white px-4" style="background-color: rgb(2, 2, 48);">
+              Update Quiz
+            </button>
+          </div>
+        </form>
+      </div>
+      
+    <!-- Footer Section -->
+  <footer class="footer">
+    <div class="footer_background" style="background-image: url(/images/footer_background.png)"></div>
+    <div class="container">
+      <div class="row footer_row">
+        <!-- About Section -->
+        <div class="col-lg-4 col-md-6 footer_col">
+          <div class="footer_section footer_about">
+            <div class="footer_logo_container">
+              <a href="#">
+                <div class="footer_logo_text">Physics<span>Verse</span></div>
+              </a>
+            </div>
+            <div class="footer_about_text">
+              <p>A virtual physics Lab. Explore the wonders of physics with PhysicsVerse.</p>
+            </div>
+            <div class="footer_social">
+              <ul>
+								<li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+							</ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Useful Links Section -->
+        <div class="col-lg-3 col-md-6 footer_col">
+          <div class="footer_section footer_links">
+            <div class="footer_title">Useful Links</div>
+            <div class="footer_links_container">
+              <ul>
+                <li><a href="#" id="footer_home">Home</a></li>
+                <li><a href="#" id="footer_about">About Us</a></li>
+                <!-- <li><a href="#" id="footer_courses">Experiments</a></li> -->
+                <li><a href="#" id="footer_contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="col-lg-5 col-md-12 footer_col">
+          <div class="footer_section footer_contact">
+            <div class="footer_title">Contact Us</div>
+            <div class="footer_contact_info">
+              <ul>
+                <li><i class="fa fa-user" aria-hidden="true"></i>Tuba Jabeen | Isha Eman</li>
+                <li><i class="fa fa-phone" aria-hidden="true"></i> +92-3345605064 | +92-3019575969</li>
+                <li><i class="fa fa-envelope" aria-hidden="true"></i> fa21-bcs-033@cuiatk.edu.pk |
+                  fa21-bcs-046@cuiatk.edu.pk</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div> <!-- Close footer_row -->
+
+      <!-- Copyright Section -->
+      <div class="row">
+        <div class="col">
+          <div class="footer_copyright">
+            <p>&copy; 2025 PhysicsVerse. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Local JavaScript files -->
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="/bootstrap4/popper.js"></script>
+    <script src="/bootstrap4/bootstrap.min.js"></script>
+    <script src="/plugins/greensock/TweenMax.min.js"></script>
+    <script src="/plugins/greensock/TimelineMax.min.js"></script>
+    <script src="/plugins/scrollmagic/ScrollMagic.min.js"></script>
+    <script src="/plugins/greensock/animation.gsap.min.js"></script>
+    <script src="/plugins/greensock/ScrollToPlugin.min.js"></script>
+    <script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+    <script src="/plugins/easing/easing.js"></script>
+    <script src="/plugins/parallax-js-master/parallax.min.js"></script>
+<script src="/js/quiz.js"></script>
+    <!-- Custom JavaScript -->
+    <!-- <script src="/js/custom.js"></script> -->
+    <script>
+    function validateCurrentQuestion(event) {
+    // Prevent form submission initially
+    event.preventDefault();
+    
+    let count = 0; // Reset count initially
+
+    // Get form elements by name (not ID)
+    const question = document.querySelector('input[name="Question"]').value.trim();
+    const options = [
+        document.querySelector('input[name="option1"]').value.trim(),
+        document.querySelector('input[name="option2"]').value.trim(),
+        document.querySelector('input[name="option3"]').value.trim(),
+        document.querySelector('input[name="option4"]').value.trim()
+    ];
+    const answer = document.querySelector('input[name="Answer"]').value.trim();
+
+    // Check if all fields are filled
+    if (!question || options.some(opt => !opt) || !answer) {
+        alert('Please fill out all fields before proceeding.');
+        return false;
+    }
+
+    // Clean option text (remove prefixes like 'A:', '1)', etc.)
+    const cleanedOptions = options.map(option => {
+        const parts = option.split(':'); 
+        return parts.length > 1 ? parts.slice(1).join(':').trim() : option.trim();
+    });
+
+    // Validate no duplicate options
+    for (let i = 0; i < cleanedOptions.length; i++) {
+        for (let j = i + 1; j < cleanedOptions.length; j++) {
+            if (cleanedOptions[i] === cleanedOptions[j]) {
+                alert(`Duplicate option found: "${options[i]}"`);
+                return false;
+            }
+        }
+    }
+
+    const optionPattern =  /^[A-Za-z]{2,}$|^\d{1,}$|^[A-Za-z\s\.,\-$$$$\?\!;:\"\']{2,}$/;;
+
+    for (const option of options) {
+        // Extract the content after "D:", "1:", etc.
+        const content = option.split(':').slice(1).join(':').trim() || option.trim();
+        
+        // Validate the content based on the pattern
+        if (!optionPattern.test(content)) {
+            alert(`Option "${content}" is invalid. Options must be either:
+            - A number (e.g., 1, 42)
+            - A word with at least two letters (e.g., "ab", "word")
+            - A sentence with at least two characters (e.g., "A sentence")
+            
+            Single letters like "a", "b", "k" are not allowed.`);
+            return false;
+        }
+    }
+    
+    const validAnswerPattern = /^[A-Za-z]{2,}$|^\d{1,}$|^[A-Za-z\s\.,\-$$$$\?\!;:\"\']{2,}$/;
+
+    // Validate the answer content
+    if (!validAnswerPattern.test(answer)) {
+        alert(`Answer "${answer}" is invalid. Answers must be either:
+        - A number (e.g., 1, 42)
+        - A word with at least two letters (e.g., "ab", "word")
+        - A sentence with at least two characters (e.g., "A sentence")
+        
+        Single letters like "a", "b", "k" are not allowed.`);
+        return false;
+    }
+
+    // If all validations passed, submit the form
+    document.querySelector('form').submit();
+    return true;
+}
+    </script>
+    <!-- <script src="/js/quiz.js"></script> -->
+  </body>
+</html>

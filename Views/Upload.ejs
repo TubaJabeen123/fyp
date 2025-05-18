@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <link rel="stylesheet" href="/assets_1/css/fontawesome.css">
+    <link rel="stylesheet" href="/assets_1/css/templatemo-edu-meeting.css">
+    <link rel="stylesheet" href="/assets_1/css/owl.css">
+    <link rel="stylesheet" href="/assets_1/css/lightbox.css">
+    <link rel="stylesheet" type="text/css" href="/css-file/main_styles.css" />
+    <link rel="stylesheet" type="text/css" href="/css-file/responsive.css" />
+    <link rel="stylesheet" href="/css-file/tchrConsole.css">
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>File Upload</title>
+    <style>
+       .header-bar {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+  }
+        /* * {
+            box-sizing: border-box;
+        } */
+        .container_1 {
+            max-width: 500px;
+            margin: 100px auto;
+            /* border: 2px dotted  #090341;; */
+        }
+        .container_1 h1 {
+            text-align: center;
+            color:  #090341;
+        }
+        form {
+            background-color: white;
+            padding: 30px;
+            color: black;
+        }
+        form .input-group {
+            margin-bottom: 15px;
+        }
+        form label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        form input,
+        form select {
+            padding: 12px 20px;
+            width: 100%;
+            border: 1px solid #070707;
+            color: black;
+        }
+        .submit-btn {
+            width: 100%;
+            border: none;
+            background:#051a41;
+            font-size: 18px;
+            color: white;
+            border-radius: 3px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .footer_row {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.footer_col {
+    margin-bottom: 30px;
+    width: 100%; /* Ensure each column takes full width on smaller screens */
+}
+
+@media screen and (min-width: 768px) {
+    .footer_col {
+        width: auto; /* Allow columns to take their natural width on larger screens */
+    }
+}
+
+    </style>
+</head>
+<body>
+    <!-- ***** Header Area Start ***** -->
+    <div class="super_container">
+
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row" style="padding-left: 20px;">
+            <div class="col-12">
+                <nav class="main-nav">
+            
+                  <!-- ***** Logo Start ***** -->
+                      <div class="header-bar">
+                        <a href="/tchr/tchrConsole"><i class="fa fa-arrow-left fa-2x back-icon" style="margin:5px ; margin-top: 20px; color: white;"></i></a>
+                      
+                        <div class="logo">
+                          <img src="/images/R.jpeg" class="uniLogo" alt="UniLogo" />
+                          <div class="logo_text">Physics<span>Verse</span></div>
+                        </div>
+                      </div>
+                      
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                  
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+    
+    <div class="container_1">
+        <h1>File Upload</h1>
+        <form id="form" action="/tchr/upload" method="post" enctype="multipart/form-data">
+            <!-- Document Title -->
+            <div class="input-group">
+                <label for="title">Exp_No</label>
+                <select name="exp_no" id="exp_no" required>
+                    <option value="" disabled selected>Select an experiment</option>
+                    <% const experiments = [
+                        { exp_no: 1, title: "penExp" },
+                        { exp_no: 2, title: "massExp" },
+                        { exp_no: 3, title: "MeterRod" },
+                        { exp_no: 4, title: "ForceExp" },
+                        { exp_no: 5, title: "resonance" },
+                                                // { exp_no: 6, title: "'Archimedes\' Principle" }
+
+                    ]; %>
+                    
+                    <% experiments.forEach(exp => { %>
+                        <option value="<%= exp.exp_no %>"><%= exp.title %></option>
+                    <% }) %>
+                </select>
+                            </div>
+
+            <div class="input-group">
+                <label for="title">Document Name</label>
+                <input type="text" name="title" id="title" placeholder="Enter document name" required />
+            </div>
+
+            <!-- File Type Selection -->
+            <div class="input-group">
+                <label for="fileType">Select File Type</label>
+                <select name="fileType" id="fileType" required>
+                    <option value="pdf">PDF</option>
+                    <option value="video">Video</option>
+                    <option value="image">Image</option>
+                </select>
+            </div>
+
+            <!-- File Upload -->
+            <div class="input-group">
+                <label for="file">Upload File</label>
+                <input type="file" name="file" id="file" required accept=".pdf, .mp4, .jpg, .jpeg, .png" />
+            </div>
+
+            <!-- Access Selection -->
+            <div class="input-group">
+                <label for="access">File Access</label>
+                <select name="assignedTo" id="access" required>
+                    <option value="all">All Students</option>
+                    <option value="class">Specific Class</option>
+                </select>
+            </div>
+
+            <!-- Class ID Field (Only Used if 'class' is selected) -->
+            <div class="input-group" id="classField" style="display: none;">
+                <label for="classId">Select Class</label>
+               
+    <% if (classes.length > 0) { %>
+        <select name="classId" id="classId">
+            <% classes.forEach(classroom => { %>
+                <option value="<%= classroom._id %>"><%= classroom.className %></option>
+            <% }); %>
+        </select>
+    <% } else { %>
+        <p>No classes available. Please create a class first.</p>
+    <% } %>
+                </select>
+            </div>
+
+           
+         
+            <input type="hidden" name="fileSize" id="fileSize" />
+
+            <button class="submit-btn" type="submit">
+                <i class="fas fa-upload"></i> Upload
+            </button>
+            
+                    </form>
+    </div>
+</div>
+
+	<footer class="footer">
+		<div class="footer_background" style="background-image: url(/images/footer_background.png)"></div>
+		<div class="container">
+			<div class="row footer_row" style="padding: 40px;">
+				<!-- About Section -->
+				<div class="col-lg-4 col-md-6 footer_col">
+					<div class="footer_section footer_about">
+						<div class="footer_logo_container">
+							<a href="#">
+								<div class="footer_logo_text">Physics<span>Verse</span></div>
+							</a>
+						</div>
+						<div class="footer_about_text">
+							<p>A virtual physics Lab. Explore the wonders of physics with PhysicsVerse.</p>
+						</div>
+						<div class="footer_social">
+							<ul>
+								<li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+								<li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- Useful Links Section -->
+				<div class="col-lg-3 col-md-6 footer_col">
+					<div class="footer_section footer_links">
+						<div class="footer_title">Useful Links</div>
+						<div class="footer_links_container">
+							<ul>
+								<li><a href="#" id="footer_home">Home</a></li>
+								<li><a href="#" id="footer_about">About Us</a></li>
+								<!-- <li><a href="#" id="footer_courses">Experiments</a></li> -->
+								<li><a href="#" id="footer_contact">Contact</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+				<!-- Contact Section -->
+				<div class="col-lg-5 col-md-12 footer_col">
+					<div class="footer_section footer_contact">
+						<div class="footer_title">Contact Us</div>
+						<div class="footer_contact_info">
+							<ul>
+								<li><i class="fa fa-user" aria-hidden="true"></i>Tuba Jabeen | Isha Eman</li>
+								<li><i class="fa fa-phone" aria-hidden="true"></i> +92-3345605064 | +92-3019575969</li>
+								<li><i class="fa fa-envelope" aria-hidden="true"></i> fa21-bcs-033@cuiatk.edu.pk |
+									fa21-bcs-046@cuiatk.edu.pk</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div> <!-- Close footer_row -->
+
+			<!-- Copyright Section -->
+			<div class="row">
+				<div class="col">
+					<div class="footer_copyright">
+						<p>&copy; 2025 PhysicsVerse. All rights reserved.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</div>
+
+    <script>
+        // Show class selection only when "Specific Class" is chosen
+        document.getElementById("access").addEventListener("change", function() {
+            let classField = document.getElementById("classField");
+            classField.style.display = this.value === "class" ? "block" : "none";
+        });
+
+        // Restrict accepted file types based on fileType selection
+        document.getElementById("fileType").addEventListener("change", function() {
+            let fileInput = document.getElementById("file");
+            if (this.value === "pdf") {
+                fileInput.accept = ".pdf";
+            } else if (this.value === "video") {
+                fileInput.accept = ".mp4";
+            } else if (this.value === "image") {
+                fileInput.accept = ".jpg, .jpeg, .png";
+            }
+        });
+        document.getElementById("file").addEventListener("change", function () {
+        const file = this.files[0];
+        const fileSize = file.size / (1024 * 1024); // Convert size to MB
+        document.getElementById("fileSize").value = file.size; // Save file size in hidden input
+
+        if (fileSize > 16) {
+            alert("File size exceeds 16MB. Please upload a smaller file.");
+            this.value = ''; // Reset file input field
+            document.getElementById("fileSize").value = ''; // Reset file size hidden field
+        }
+    });
+    </script>
+    
+</body>
+</html>

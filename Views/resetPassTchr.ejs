@@ -1,0 +1,324 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Teacher  Account Reset</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="Unicat project" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" type="text/css" href="/bootstrap4/bootstrap.min.css" />
+    <link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
+    <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
+    <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css" />
+    <link rel="stylesheet" type="text/css" href="/css-file/main_styles.css" />
+    <link rel="stylesheet" type="text/css" href="/css-file/responsive.css" />
+	<!-- <link rel="stylesheet" href="/css-file/signup.css"> -->
+  <link rel="stylesheet" href="/assets/css/fontawesome.css">
+  <link rel="stylesheet" href="/assets/css/templatemo-seo-dream.css">
+  <link rel="stylesheet" href="/assets/css/animated.css">
+  <link rel="stylesheet" href="/assets/css/owl.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/css-file/tchrConsole.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css">
+    <link rel="stylesheet" href="/css-file/reset.css">
+
+  </head>
+  <body>
+    <div class="super_container">
+      <!-- Header -->
+
+      <header class="header">
+        <!-- Top Bar -->
+       
+  
+        <!-- Header Content -->
+        <div class="header_container">
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                  <div
+                  class="header_content d-flex flex-row align-items-center justify-content-start">
+              
+                  <a href="/std/login" style="display: flex; align-items: center; text-decoration: none;  font-size: 30px;">
+                    <i class="fa fa-arrow-left" style="margin: 9px; padding: 10px;"></i>
+                    <!-- <i class="fas fa-arrow-left"></i>  -->
+                    </a>
+                    <img src="/images/R.jpeg" class="uniLogo" alt="UniLogo">
+                  <div class="logo_container">
+                    <a href="#">
+                      <div class="logo_text">Physics<span>Verse</span></div>
+                    </a>
+                  </div>
+      <!-- HTML !-->
+  
+      
+    
+  
+       
+              </div>
+              <nav class="main_nav_contaner ml-auto">
+                <ul class="main_nav">
+                      
+                  <li>
+                    <a href="/" style="display: flex; align-items: center; text-decoration: none;  font-size: 30px;">
+                      <i class="fa fa-home" style="margin-right: 2px; padding: 4px;"></i>
+                    </a>
+                  </li>
+                </ul>
+               
+              </nav>
+            </div>
+             <!-- Filter Form -->
+     
+          </div>
+        </div>
+      </header>
+      <!-- Header Section -->
+   </div>
+
+    <!-- Home -->
+   
+
+	
+    <!-- Features -->
+
+    <div class="features">
+      
+      <!-- First Modal: Email Input -->
+      <div id="emailModal" class="modal">
+        <div class="modal-content">
+          <div class="header-bar">
+            <h2>Enter Your Email</h2></div>
+            <div class="form-content">
+
+            <form action="/tchr/send-otp" method="POST" onsubmit="showModal('otpModal')">
+              <select name="email" id="teacherEmail">
+                <option value="">Select your email</option>
+                <% teachers.forEach(teacher => { %>
+                  <option value="<%= teacher.email %>"><%= teacher.email %></option>
+                <% }); %>
+              </select>            
+                  <button type="submit" >Send OTP</button>
+            </form>
+        </div></div>
+    </div>
+    
+    <!-- Second Modal: OTP Input -->
+    <div id="otpModal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="header-bar">
+
+            <h2>Enter OTP</h2></div>
+            <div class="form-content">
+
+            <form action="/tchr/verify-otp?email=<%= email %>" method="POST" onsubmit="showModal('passwordModal')">
+              <input type="hidden" name="email" value="<%= email %>">
+              <div class="otp-inputs">
+                <input type="text" name="code" maxlength="6" required>
+                <!-- <input type="text" name="otp2" maxlength="1" required>
+                <input type="text" name="otp3" maxlength="1" required>
+                <input type="text" name="otp4" maxlength="1" required> -->
+              </div>
+              <!-- <button type="submit">Verify OTP</button> -->
+              <!-- <input type="email" name="email" placeholder="Enter your email" required> -->
+                <button type="submit" onclick="showPasswordModal(event)">Verify OTP</button>
+            </form>
+        </div></div>
+    </div>
+    
+    <!-- Third Modal: Password Reset -->
+    <div id="passwordModal" class="modal" style="display: none;">
+        <div class="modal-content">
+          <div class="header-bar">
+
+            <h2>Reset Password</h2></div>
+            <div class="form-content"></div>
+            <form action="/tchr/reset-password?email=<%= email %>" method="POST">
+              <input type="hidden" name="email" value="<%= email %>">
+                <input type="password" name="newPassword" placeholder="New Password" required>
+                <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+                <button type="submit" onclick="startNewProject()">Reset Password</button>
+            </form>
+        </div></div>
+    </div>
+
+		</div>  
+      <!-- Features -->
+
+
+      <div class="partners">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="partners_slider_container">
+						<div class="owl-carousel owl-theme partners_slider">
+
+							<!-- Partner Item -->
+							<div class="owl-item partner_item"><img src="/images/partner_1.png" alt=""></div>
+
+							<!-- Partner Item -->
+							<div class="owl-item partner_item"><img src="/images/partner_2.png" alt=""></div>
+
+							<!-- Partner Item -->
+							<div class="owl-item partner_item"><img src="/images/partner_3.png" alt=""></div>
+
+							<!-- Partner Item -->
+							<div class="owl-item partner_item"><img src="/images/partner_4.png" alt=""></div>
+
+							<!-- Partner Item -->
+							<div class="owl-item partner_item"><img src="/images/partner_5.png" alt=""></div>
+
+							<!-- Partner Item -->
+							<div class="owl-item partner_item"><img src="/images/partner_6.png" alt=""></div>
+
+						</div>
+                        <div class="social_list">
+                            <ul>
+                                <!-- <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li> -->
+                            </ul>
+                        </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>
+      <!-- Popular Courses -->
+
+      <!-- Footer -->
+
+      <footer class="footer">
+        <div class="footer_background" style="background-image: url(/images/footer_background.png)"></div>
+        <div class="container">
+          <div class="row footer_row">
+            <!-- About Section -->
+            <div class="col-lg-4 col-md-6 footer_col">
+              <div class="footer_section footer_about">
+                <div class="footer_logo_container">
+                  <a href="#">
+                    <div class="footer_logo_text">Physics<span>Verse</span></div>
+                  </a>
+                </div>
+                <div class="footer_about_text">
+                  <p>A virtual physics Lab. Explore the wonders of physics with PhysicsVerse.</p>
+                </div>
+                <div class="footer_social">
+                  <ul>
+                    <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Useful Links Section -->
+            <div class="col-lg-3 col-md-6 footer_col">
+              <div class="footer_section footer_links">
+                <div class="footer_title">Useful Links</div>
+                <div class="footer_links_container">
+                  <ul>
+                    <li><a href="#" id="footer_home">Home</a></li>
+                    <li><a href="#" id="footer_about">About Us</a></li>
+                    <!-- <li><a href="#" id="footer_courses">Experiments</a></li> -->
+                    <li><a href="#" id="footer_contact">Contact</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+    
+            <!-- Contact Section -->
+            <div class="col-lg-5 col-md-12 footer_col">
+              <div class="footer_section footer_contact">
+                <div class="footer_title">Contact Us</div>
+                <div class="footer_contact_info">
+                  <ul>
+                    <li><i class="fa fa-user" aria-hidden="true"></i>Tuba Jabeen | Isha Eman</li>
+                    <li><i class="fa fa-phone" aria-hidden="true"></i> +92-3345605064 | +92-3019575969</li>
+                    <li><i class="fa fa-envelope" aria-hidden="true"></i> fa21-bcs-033@cuiatk.edu.pk |
+                      fa21-bcs-046@cuiatk.edu.pk</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div> <!-- Close footer_row -->
+    
+          <!-- Copyright Section -->
+          <div class="row">
+            <div class="col">
+              <div class="footer_copyright">
+                <p>&copy; 2025 PhysicsVerse. All rights reserved.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+      
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- Bootstrap JS Bundle -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+<!-- Local JavaScript files -->
+<script src="/js/jquery-3.2.1.min.js"></script>
+<script src="/bootstrap4/popper.js"></script>
+<script src="/bootstrap4/bootstrap.min.js"></script>
+<script src="/plugins/greensock/TweenMax.min.js"></script>
+<script src="/plugins/greensock/TimelineMax.min.js"></script>
+<script src="/plugins/scrollmagic/ScrollMagic.min.js"></script>
+<script src="/plugins/greensock/animation.gsap.min.js"></script>
+<script src="/plugins/greensock/ScrollToPlugin.min.js"></script>
+<script src="/plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="/plugins/easing/easing.js"></script>
+<script src="/plugins/parallax-js-master/parallax.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script src="/js/custom.js"></script>
+<script>
+    // function showOTPModal(event) {
+    //     event.preventDefault();
+    //     document.querySelector("#emailModal form").submit();
+    //     document.getElementById("emailModal").style.display = "none";
+    //     document.getElementById("otpModal").style.display = "block";
+    // }
+
+    // function showPasswordModal(event) {
+    //     event.preventDefault();
+    //     document.querySelector("#otpModal form").submit();
+    //     document.getElementById("otpModal").style.display = "none";
+    //     document.getElementById("passwordModal").style.display = "block";
+    // }
+      // Function to show modal
+      function showModal(modalId) {
+        document.getElementById("emailModal").style.display = "none";
+        document.getElementById("otpModal").style.display = "none";
+        document.getElementById("passwordModal").style.display = "none";
+
+        document.getElementById(modalId).style.display = "block";
+        localStorage.setItem("activeModal", modalId); // Store which modal is active
+    }
+
+    // Function to load the correct modal on page refresh
+    function loadModalState() {
+        const activeModal = localStorage.getItem("activeModal") || "emailModal"; // Default to emailModal
+        showModal(activeModal);
+    }
+    function startNewProject() {
+    // Clear localStorage to reset the modal state
+    localStorage.removeItem("activeModal");}
+    window.onload = loadModalState; // Run on page load
+</script>
+
+  </body>
+</html>

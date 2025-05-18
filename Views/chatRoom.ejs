@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Chat Room - <%= community.communityName %></title>
+  <link rel="stylesheet" href="/css-file/chat2.css">
+  <!-- <link rel="stylesheet" type="text/css" href="/css-file/main_styles.css" />
+  <link rel="stylesheet" type="text/css" href="/css-file/responsive.css" /> -->
+  <link rel="stylesheet" href="/css-file/tchrConsole.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+    body{
+      background: radial-gradient(circle, #ffffff 0%, #585858 50%, #13033f 100%);
+    background-position: center;
+    background-size: cover;
+    	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 12px;
+	color: #333f4d;
+}
+</style>
+ <body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const socket = io();
+
+      const communityId = '<%= community._id %>';
+      socket.emit('joinCommunity', communityId);
+
+      const form = document.getElementById('chat-form');
+      const messageInput = document.getElementById('message');
+      const messageList = document.getElementById('messages');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const message = messageInput.value;
+        if (message.trim() !== '') {
+          socket.emit('sendMessage', {
+            communityId,
+            message,
+            userId: '<%= user.id %>',
+            role: '<%= user.role %>'
+          });
+          messageInput.value = '';
+        }
+      });
+
+      socket.on('newMessage', (data) => {
+        const msgElement = document.createElement('li');
+        msgElement.textContent = `${data.senderRole} (${data.senderId}): ${data.content}`;
+        messageList.appendChild(msgElement);
+      });
+    });
+    $(function(){
+	$('.chat-area > .chat-list').jScrollPane({
+		mouseWheelSpeed: 30
+	});
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll(".tabs li");
+    const contents = document.querySelectorAll(".tab-content");
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", function () {
+            // Remove 'active' class from all tabs
+            tabs.forEach(t => t.classList.remove("active"));
+            this.classList.add("active");
+
+            // Get the target tab content
+            const tabId = this.getAttribute("data-tab");
+
+            // Hide all content and show only the selected one
+            contents.forEach(content => {
+                content.style.display = "none";
+            });
+            document.getElementById(tabId).style.display = "block";
+        });
+    });
+});
+
+  </script>
+</head>
+<body>
+    <div class="super_container">
+        <!-- Header Section -->
+        <header class="header">
+          <!-- Top Bar -->
+         
+    
+          <!-- Header Content -->
+          <div class="header_container">
+            <div class="container">
+              <div class="row">
+                <div class="col">
+                  <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                    <div
+                    class="header_content d-flex flex-row align-items-center justify-content-start">
+                    <a href="javascript:history.back()"  style="display: flex; align-items: center; text-decoration: none;  font-size: 30px;">
+                      <i class="fa fa-arrow-left" style="margin: 9px; padding: 10px;"></i> 
+                      <img src="/images/R.jpeg" class="uniLogo" alt="UniLogo">
+                    <div class="logo_container">
+                      <a href="#">
+                        <div class="logo_text">Physics<span>Verse</span></div>
+                      </a>
+                    </div>
+        <!-- HTML !-->
+    
+        
+      
+    
+         
+                </div>
+                <nav class="main_nav_contaner ml-auto">
+                  <ul class="main_nav" ">
+                  
+                    <li>
+                      <a href="/stdConsole" style="display: flex; align-items: center; text-decoration: none;  font-size: 30px; ">
+                        <i class="fa fa-home" style="margin-right: 2px; "></i>
+                      </a>
+                    </li>
+                  </ul>>
+                 
+                </nav>
+              </div>
+               <!-- Filter Form -->
+       
+            </div>
+          </div>
+        </header>
+    
+  <div class="window-wrapper">
+    <div class="window-title">
+        <div class="dots">
+            <i class="fa fa-circle"></i>
+            <i class="fa fa-circle"></i>
+            <i class="fa fa-circle"></i>
+        </div>
+       
+        <div class="expand">
+            <i class="fa fa-expand"></i>
+        </div>
+    </div>
+
+    <div class="window-area">
+        <div class="conversation-list">
+           <ul>
+    <!-- Dashboard Item -->
+    <li class="item" style="background-color: rgb(6, 6, 58);">
+        <a href="/stdConsole">
+            <i class="fa fa-list-alt"></i><span>Dashboard</span>
+        </a>
+    </li>
+
+    <!-- List of Communities -->
+    <% communities.forEach(communitys => { %>
+        <li class="community-item <%= communitys._id.toString() === community._id.toString() ? 'active-community' : '' %>">
+            <a href="/std/chat/<%= communitys._id %>">
+                <i class="fa fa-users"></i>
+                <span><%= communitys.communityName %></span>
+            </a>  
+        </li>
+    <% }); %>
+</ul>
+
+            <div class="my-account">
+                <div class="image">
+                  <img src="/images/profile.jpg">
+                  <i class="fa fa-circle online"></i>
+               
+                  <span class="availability" style="margin-bottom: 5px; ">   Admin:
+                  </span>
+              </div>
+              <span class="availability" style="margin-right: 5px; padding: 4px; color: rgb(9, 9, 46); font-weight: bold;"> Created by: </span>
+
+              <div class="name">
+                <% if (teacher) { %>
+                  <span class="availability" style="color: black;">
+                    <%= `${teacher.fname} ${teacher.lname}` %>
+                  </span>
+                <% } else { %>
+                  <span class="availability" style="color: red;">Unknown Teacher</span>
+                <% } %>
+                
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-area">
+            <div class="title" style="background-color: rgb(6, 6, 58); color: beige; text-align: center; font-size: 14px;"><span><%= community.communityName %> Chat Room</span>
+                <i class="fa fa-search"></i></div>
+            <div class="chat-messages">
+                <% messages.forEach(msg => { %>
+                    <% if (msg.isSender) { %>
+                        <div class="message sender">
+                            <p><strong>You:</strong> <%= msg.message %></p>
+                            <small class="timestamp"><%= new Date(msg.timestamp).toLocaleTimeString() %></small>
+                            <form action="/std/chat/<%= community._id %>/delete-message/<%= msg._id %>" method="POST" class="delete-form">
+                                <button type="submit" class="delete-icon">🗑</button>
+                            </form>
+                        
+                            <!-- Delete button for the sender's messages -->
+                        </div>
+                       
+                    <% } else { %>
+                        <div class="message receiver">
+                            <p><strong><%= msg.userType === 'tchr' ? 'Teacher' : 'Student' %>:</strong> <%= msg.message %></p>
+                            <small class="timestamp"><%= new Date(msg.timestamp).toLocaleTimeString() %></small>
+                        </div>
+                    <% } %>
+                <% }); %>
+            </div>
+
+         <div class="input-area">
+    <div class="input-wrapper">
+        <form id="messageForm" action="/std/chat/<%= community._id %>/message" method="POST">
+            <!-- <i class="fa fa-pencil-alt"></i>         -->
+
+            <input type="text" name="message" placeholder="Type your message..." required />
+                   </form>
+    </div>
+    <div class="send-button">
+        <button type="submit" form="messageForm" class="send-btn">
+            <img src="/images/send.png" alt="Send" class="send-icon">
+
+            <!-- <i class="fa fa-paper-plane"></i> Send icon -->
+        </button>
+    </div>
+</div>
+
+        </div>
+
+        <div class="right-tabs">
+            <ul class="tabs">
+                <li class="active" data-tab="participants"><a href="#"><i class="fa fa-users"></i></a></li>
+                <li data-tab="creation">
+                    <a href="#"><i class="fa fa-calendar-alt"></i></a> <!-- Calendar icon for creation date -->
+                </li>
+                <li data-tab="info">
+                    <a href="#"><i class="fa fa-info-circle"></i></a> <!-- Info icon for community details -->
+                </li>
+            </ul>
+        
+            <div class="tabs-container">
+                <!-- Participants -->
+                <div class="tab-content active" id="participants">
+                    <ul class="member-list">
+                        <li>
+                            <span class="status"><i class="fa fa-circle-o"></i></span>
+                            <span class="p"> Total Participants: <%= community.totalUsers %></span>
+                        </li>
+                    </ul>
+                </div>
+        
+                <!-- Community Creation Time -->
+                <div class="tab-content" id="creation">
+                    <p class="p">Created on: <%= new Date(community.createdAt).toLocaleDateString('en-US', { 
+                        weekday: 'long', 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                    }) %> at <%= new Date(community.createdAt).toLocaleTimeString('en-US', { 
+                        hour: '2-digit', 
+                        minute: '2-digit', 
+                        second: '2-digit', 
+                        hour12: true 
+                    }) %></p>
+                </div>
+                
+        
+                <!-- Community Info -->
+                <div class="tab-content" id="info">
+                    <p class="p"> Community Name: <%= community.communityName %></p>
+                    <p class="p">Description: <%= community.commDescription %></p>
+                </div>
+
+                 <!-- Leave Community Button -->
+                 <div class="leave-section" >
+                  <a href="/stdConsole" class="leave-btn">
+                     Leave Community
+                  </a>
+              </div>
+              
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+<footer class="footer">
+    <div class="footer_background" style="background-image: url(/images/footer_background.png)"></div>
+    <div class="container">
+      <div class="row footer_row">
+        <!-- About Section -->
+        <div class="col-lg-4 col-md-6 footer_col">
+          <div class="footer_section footer_about">
+            <div class="footer_logo_container">
+              <a href="#">
+                <div class="footer_logo_text">Physics<span>Verse</span></div>
+              </a>
+            </div>
+            <div class="footer_about_text">
+              <p>A virtual physics Lab. Explore the wonders of physics with PhysicsVerse.</p>
+            </div>
+            <div class="footer_social">
+              <ul>
+                    <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="#"><i class="fab fa-google-plus-g"></i></a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                  
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Useful Links Section -->
+        <div class="col-lg-3 col-md-6 footer_col">
+          <div class="footer_section footer_links">
+            <div class="footer_title">Useful Links</div>
+            <div class="footer_links_container">
+              <ul>
+                <li><a href="#" id="footer_home">Home</a></li>
+                <li><a href="#" id="footer_about">About Us</a></li>
+                <!-- <li><a href="#" id="footer_courses">Experiments</a></li> -->
+                <li><a href="#" id="footer_contact">Contact</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="col-lg-5 col-md-12 footer_col">
+          <div class="footer_section footer_contact">
+            <div class="footer_title">Contact Us</div>
+            <div class="footer_contact_info">
+              <ul>
+                <li><i class="fa fa-user" aria-hidden="true"></i>Tuba Jabeen | Isha Eman</li>
+                <li><i class="fa fa-phone" aria-hidden="true"></i> +92-3345605064 | +92-3019575969</li>
+                <li><i class="fa fa-envelope" aria-hidden="true"></i> fa21-bcs-033@cuiatk.edu.pk |
+                  fa21-bcs-046@cuiatk.edu.pk</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div> <!-- Close footer_row -->
+
+      <!-- Copyright Section -->
+      <div class="row">
+        <div class="col">
+          <div class="footer_copyright">
+            <p>&copy; 2025 PhysicsVerse. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const tabs = document.querySelectorAll(".tabs li");
+    const contents = document.querySelectorAll(".tab-content");
+
+    // Ensure only the first content is visible
+    contents.forEach(content => content.style.display = "none");
+    document.querySelector(".tab-content.active").style.display = "block";
+
+    tabs.forEach(tab => {
+        tab.addEventListener("click", function (event) {
+            event.preventDefault(); // Stop page jump
+
+            // Remove 'active' class from all tabs
+            tabs.forEach(t => t.classList.remove("active"));
+            this.classList.add("active");
+
+            // Hide all content and show only the selected one
+            contents.forEach(content => content.style.display = "none");
+            const tabId = this.getAttribute("data-tab");
+            document.getElementById(tabId).style.display = "block";
+        });
+    });
+});
+
+</script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+  </body>
+</html>

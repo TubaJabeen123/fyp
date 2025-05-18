@@ -1,0 +1,130 @@
+.features {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+     height: 1000vh;
+    /*background: linear-gradient(to bottom, #6b6980, #c5c4c7, #1c1c1d);} */
+}.modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed; /* Stick on screen */
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh; /* Full viewport height */
+    background: rgba(255, 255, 255, 0.5); /* Optional dark overlay */
+    z-index: 9999; /* Stay on top */
+    padding: 20px;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    width: 100%;
+    max-width: 800px; /* Keep it responsive */
+    /* box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); */
+    text-align: center;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 50%;
+    padding: 10px;
+    background: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+/* For the OTP modal */
+.otp-container {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 400px;
+    width: 100%;
+}
+
+
+.otp-inputs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    letter-spacing: 10px; /* Create space between digits */
+  }
+  
+  .otp-inputs input {
+    font-size: 32px;
+    width: 260px; /* Wider to accommodate spacing */
+    padding: 10px;
+    text-align: center;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    letter-spacing: 42px; /* Adjust as needed */
+    background: #f9f9f9;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  }
+  
+  .otp-inputs input:focus {
+    outline: none;
+    border-color: #007bff;
+    background: #fff;
+  }
+  
+
+/* Media Query for responsiveness */
+@media (max-width: 768px) {
+    .modal {
+        width: 90%; /* Make modal take up more width on smaller screens */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Keep it centered */
+    }
+}
+
+h1, h2 { 
+    margin: 0; 
+    font-family: 'Leckerli One', cursive;
+    text-shadow: 0 2px rgba(0,0,0,.5);
+  }
+  .header-bar{
+    padding-bottom: 20px;
+  }
+  .form-content{
+    padding-bottom: 20px;
+
+  }
+    select {
+    padding: 12px 19px;
+    border: 1px solid #ccc;
+    width: 100%;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    font-size: 16px;
+    color: #333;
+    outline: none;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  select:hover {
+    background-color: #f1f1f1;
+  }

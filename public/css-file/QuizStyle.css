@@ -1,0 +1,319 @@
+/* quizStyles.css */
+
+/* Overall home container styling */
+.home {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+     padding-top: 50px;
+  padding-bottom: 40px;
+  margin-top: 80px;
+  margin-bottom: 40;
+
+        display: flex; /* Enable flexbox */
+    flex-direction: column; /* Arrange children in a column */
+    align-items: center; /* Center items horizontally */
+    }
+    
+
+
+/* Header styling */
+.h1 {
+    text-align: center;
+    justify-content: center;
+    color: #333;
+    margin-bottom: 60px;
+}
+
+/* Form styling */
+form {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+}
+
+label {
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+select {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px;
+    background-color:#090341;
+    color: white;
+    border: none;
+margin-top: 5px;    border-radius: 4px;
+padding-top: 10px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Quiz question styling */
+div > p {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Result section styling */
+h2 {
+    margin-top: 20px;
+    color: #333;
+}
+
+h3 {
+    margin-top: 10px;
+    color: #555;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 5px 0;
+    background-color: #e7f3ff;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+
+/* quizStyles.css */
+
+/* Modal container */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.4); /* Black with opacity */
+}
+
+/* Modal content box */
+.modal-content {
+    background-color: #fff;
+    margin: 15% auto; /* Center the modal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* Close button (X) */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* CSS */
+.button-86 {
+    all: unset;
+    width: 100px;
+    height: 30px;
+    font-size: 16px;
+    background: transparent;
+    border: none;
+    position: relative;
+    color: #f0f0f0;
+    cursor: pointer;
+    z-index: 1;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button-86::after,
+  .button-86::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: -99999;
+    transition: all .4s;
+  }
+  
+  .button-86::before {
+    transform: translate(0%, 0%);
+    width: 100%;
+    height: 100%;
+    background: #28282d;
+    border-radius: 10px;
+  }
+  
+  .button-86::after {
+    transform: translate(10px, 10px);
+    width: 35px;
+    height: 35px;
+    background: #ffffff15;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 50px;
+  }
+  
+  .button-86:hover::before {
+    transform: translate(5%, 20%);
+    width: 110%;
+    height: 110%;
+  }
+  
+  .button-86:hover::after {
+    border-radius: 10px;
+    transform: translate(0, 0);
+    width: 100%;
+    height: 100%;
+  }
+  
+  .button-86:active::after {
+    transition: 0s;
+    transform: translate(0, 5%);
+  }
+  .container_1 {
+    display: flex;
+    gap: 30px;
+  
+    padding: 20px;
+  
+  }
+  
+  .filter-container {
+    width: 25%;
+    background-color: #f0f0f0;
+    padding: 70px;
+  
+    padding-top: 70px;
+    margin-top: 200px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+  }
+  
+  .results-container {
+    flex: 1;
+    background-color: #fff;
+    padding-top: 70px;
+    margin-top: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .results-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .results-container th, .results-container td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .results-container th {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .results-container ul {
+    list-style: none;
+    padding: 0;
+  }
+  /* Responsive Design for Small Screens */
+@media (max-width: 768px) {
+    .container_1 {
+      flex-direction: column; /* Stack filter and results vertically */
+      padding: 10px;
+    }
+  
+    .filter-container {
+      width: 100%;
+      margin-top: 20px;
+      padding: 20px;
+      box-shadow: none;
+    }
+  
+    .results-container {
+      width: 100%;
+      margin-top: 20px;
+      padding: 15px;
+      box-shadow: none;
+    }
+  
+    .results-container table {
+      font-size: 12px; /* Smaller font for better readability */
+    }
+  
+    .results-container th, .results-container td {
+      padding: 8px; /* Smaller padding for compact display */
+    }
+  
+    .modal-content {
+      width: 90%; /* Adjust modal width */
+    }
+  
+    .button-86 {
+      width: 80px;
+      height: 30px;
+      font-size: 14px;
+    }
+  
+    form {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    select {
+      width: 100%;
+    }
+  
+    .filter-container label {
+      font-size: 14px;
+    }
+  
+    h1, h2, h3 {
+      font-size: 18px;
+      text-align: center;
+    }
+  
+    ul li {
+      font-size: 12px;
+    }
+  }
+  

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiments</title>
+    <link rel="stylesheet" type="text/css" href="/bootstrap4/bootstrap.min.css" />
+    <link href="/plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.carousel.css" />
+    <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/owl.theme.default.css" />
+    <link rel="stylesheet" type="text/css" href="/plugins/OwlCarousel2-2.2.1/animate.css" />
+    <link rel="stylesheet" type="text/css" href="/css-file/main_styles.css" />
+    <link rel="stylesheet" type="text/css" href="/css-file/responsive.css" />
+    <link rel="stylesheet" href="/css-file/tchrConsole.css">
+    <!-- <link rel="stylesheet" href="../public/css-file/table.scss"> -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+ <link rel="stylesheet" href="/css-file/exxpresult.css">
+</head>
+
+<body>
+  <div class="super_container">
+    <!-- Header Section -->
+    <header class="header">
+      <!-- Top Bar -->
+     
+
+      <!-- Header Content -->
+      <div class="header_container">
+        <!-- <div class="container"> -->
+          <div class="row" style="margin: 20px;">
+            <div class="col">
+              <div class="header_content d-flex flex-row align-items-center justify-content-start">
+                <div
+                class="header_content d-flex flex-row align-items-center justify-content-start">
+               
+                  <a href="javascript:history.back()"  style="display: flex; align-items: center; text-decoration: none;  font-size: 30px; margin-bottom: 10px;">
+                    <i class="fa fa-arrow-left" style="margin: 9px; padding: 10px;"></i> 
+                
+                  <!-- <i class="fas fa-arrow-left"></i>  -->
+                </a>
+                  <img src="/images/R.jpeg" class="uniLogo" alt="UniLogo">
+                <div class="logo_container">
+                  <a href="#">
+                    <div class="logo_text">Physics<span>Verse</span></div>
+                  </a>
+                </div>
+    <!-- HTML !-->
+
+    
+  
+
+     
+            </div>
+            <nav class="main_nav_contaner ml-auto">
+              <ul class="main_nav" ">
+              
+                <li>
+                  <a href="/tchr/tchrConsole" style="display: flex; align-items: center; text-decoration: none;  font-size: 30px; ">
+                    <i class="fa fa-home" style="margin-right: 30px; "></i>
+                  </a>
+                </li>
+              </ul>>
+             
+            </nav>
+          </div>
+           <!-- Filter Form -->
+   
+        </div>
+      </div>
+    </header>
+<!-- Experiment Selection -->
+<div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white shadow-md sticky top-0 z-50" style="margin-top: 50px; ">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="text-center my-4">
+      <h1 class="text-xl md:text-2xl font-bolder">Student Experiment Performance</h1>
+      <hr class="mt-2 border-t-2 border-gray-300 w-1/2 mx-auto md:w-1/3" />
+    </div>  </div>
+</div>
+
+<div class="exp-form-1 px-3 py-4 <%= showStudentModal || showGradeSection ? 'd-none' : '' %>">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+      <div class="text-center my-4">
+
+      <h2 class="text-xl md:text-2xl font-bolder" >Select Experiment</h2></div></div>
+      <form action="/tchr/select-exp" method="POST">
+        <div class="mb-3">
+          <select class="form-select" name="exp_no" required>
+            <option value="">-- Select Experiment --</option>
+            <option value="1" <%= exp_no === '1' ? 'selected' : '' %>>Pendulum</option>
+            <option value="2" <%= exp_no === '2' ? 'selected' : '' %>>Spring</option>
+            <option value="3" <%= exp_no === '3' ? 'selected' : '' %>>Meter Rod</option>
+            <option value="4" <%= exp_no === '4' ? 'selected' : '' %>>Force Table</option>
+            <option value="5" <%= exp_no === '5' ? 'selected' : '' %>>Resonance Column</option>
+                        <option value="5" <%= exp_no === '6' ? 'selected' : '' %>>Archimedes’ Principle</option>
+
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">
+          Continue <i class="fas fa-arrow-right ms-2"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<!-- Student Modal -->
+<% if (showStudentModal) { %>
+  <div class="student-form px-3 py-4">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+        <div class="text-center my-4">
+
+        <h2         class="text-xl md:text-2xl font-bolder"        >Select Student</h2></div></div>
+        <form action="/tchr/select-student" method="POST">
+          <input type="hidden" name="exp_no" value="<%= exp_no %>">
+          <select name="studentName" required class="form-select mb-3">
+            <option value="">-- Select Student --</option>
+            <% students.forEach(name => { %>
+              <option value="<%= name %>"><%= name %></option>
+            <% }) %>
+          </select>
+          <button type="submit"  class="btn btn-primary w-100">
+            <i class="fas fa-eye me-2"></i> View
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+<% } %>
+
+<!-- Grade Section -->
+<% if (showGradeSection && studentData.length > 0 ) { %>
+  <% 
+  const experiments = {
+    '1': {
+      title: 'Pendulum',
+      headers: ['Mass', 'Radius', 'Thread Length', 'Pendulum Length', 'Trial 1 Time', 'Trial 2 Time', 'Mean Time', 'Time Period'],
+      keys: ['mass', 'radius', 'threadLength', 'PenndulumLength', 'trial1Time', 'trial2Time', 'meanTime', 'timePeriod']
+    },
+    '2': {
+      title: 'Spring',
+      headers: ['Mass', 'Initial Length', 'Final Length', 'Extension', 'Trial 1 Time', 'Trial 2 Time', 'Mean Time', 'Time Period', 'Gravity'],
+      keys: ['mass', 'initialLength', 'finalLength', 'extension', 'trial1Time', 'trial2Time', 'meanTime', 'timePeriod', 'gravity']
+    },
+    '3': {
+      title: 'Meter Rod',
+      headers: ['Weight', '1/R', 'Observed Reading', 'Corrected Reading', '1/q × 1/R', 'F1', 'Loop Position', 'Distance', 'τ'],
+      keys: ['weightSuspended', 'rInverse', 'observedReading', 'correctedReading', 'qInverseRInverse', 'condition1F1_', 'loopPosition', 'distance', 'condition2Tau']
+    },
+    '4': {
+      title: 'Force Table',
+      headers: ['Force P', 'Force Q', 'Angle P', 'Angle Q', 'Psin(θP)', 'Qsin(θQ)', 'Weight', 'Error'],
+      keys: ['forceP', 'forceQ', 'angleP', 'angleQ', 'PsinAngleP', 'QsinAngleQ', 'weightW', 'weightError']
+    },
+    '5': {
+      title: 'Resonance Column',
+      headers: ['Frequency', 'Water Level', 'Diameter', 'Air Column', 'Correct Length', 'Wavelength', 'Temp', 'Velocity'],
+      keys: ['freq', 'waterLevel', 'diameter', 'airColumn', 'correctLength', 'waveLength', 'temp', 'velocity']
+    },
+    '6': {
+  title: 'Archimedes\' Principle',
+  headers: [
+    'Trial', 
+    'Weight in Air (N)', 
+    'Weight in Liquid (N)', 
+    'Volume Displaced (m³)', 
+    'Buoyant Force (N)', 
+    'Apparent Weight (N)'
+  ],
+  keys: [
+    'trial', 
+    'weightInAir', 
+    'weightInLiquid', 
+    'volumeDisplaced', 
+    'buoyantForce', 
+    'apparentWeight'
+  ]
+}
+  };
+
+  const currentExp = experiments[exp_no];
+%>
+  <div class="grade-section px-2 py-4">
+    <% if (currentExp) { %>
+      <div class="text-center my-4">
+
+    <h2    class="text-xl md:text-2xl font-bolder" "><%= currentExp.title %> Experiment - <%= selectedStudent %></h2></div>
+
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm text-center align-middle">
+        <thead class="table-light">
+          <tr>
+            <% currentExp.headers.forEach(header => { %>
+              <th><%= header %></th>
+            <% }) %>
+          </tr>
+        </thead>
+        <tbody>
+          <% studentData.forEach(exp => { %>
+            <% for (let i = 1; i <= 3; i++) { %>
+              <tr>
+                <% currentExp.keys.forEach(key => { %>
+                  <td><%= exp[key + i] %></td>
+                <% }) %>
+              </tr>
+            <% } %>
+            <tr>
+              <td colspan="<%= currentExp.headers.length %>">
+                <form action="/tchr/grade" method="POST" class="d-flex justify-content-center align-items-center flex-wrap gap-2">
+                  <input type="hidden" name="exp_no" value="<%= exp_no %>">
+                  <input type="hidden" name="exp_title" value="<%= currentExp.title %>">
+                  <input type="hidden" name="studentId" value="<%= exp.studentId || exp._id %>">
+                  <label class="me-2 mb-0">Grade:</label>
+                  <input type="number" name="grade" min="0" max="15" value="15" class="form-control w-auto" required style="margin: 8px ;">
+                  <button type="submit" class="submit-grade-btn">
+                    <i class="fas fa-check-circle"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <% } %>
+  </div></div>
+    <% } else if (!showStudentModal && !showGradeSection) { %>
+      <div class="container grade-section">
+        <p>Please select an experiment to begin grading.</p>
+      </div>
+    <% } %>
+
+
+<footer class="footer">
+  <div class="footer_background" style="background-image: url(/images/footer_background.png)"></div>
+  <!-- <div class="container"> -->
+    <div class="row footer_row" style="padding: 30px;">
+      <!-- About Section -->
+      <div class="col-lg-4 col-md-6 footer_col">
+        <div class="footer_section footer_about">
+          <div class="footer_logo_container">
+            <a href="#">
+              <div class="footer_logo_text">Physics<span>Verse</span></div>
+            </a>
+          </div>
+          <div class="footer_about_text">
+            <p>A virtual physics Lab. Explore the wonders of physics with PhysicsVerse.</p>
+          </div>
+          <div class="footer_social">
+            <ul>
+              <ul>
+                <li><a href="#"><i class="fab fa-facebook" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fab fa-google-plus" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram" aria-hidden="true"></i></a></li>
+                <li><a href="#"><i class="fab fa-twitter" aria-hidden="true"></i></a></li>
+              </ul>
+              
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Useful Links Section -->
+      <div class="col-lg-3 col-md-6 footer_col">
+        <div class="footer_section footer_links">
+          <div class="footer_title">Useful Links</div>
+          <div class="footer_links_container">
+            <ul>
+              <li><a href="#" id="footer_home">Home</a></li>
+              <li><a href="#" id="footer_about">About Us</a></li>
+              <!-- <li><a href="#" id="footer_courses">Experiments</a></li> -->
+              <li><a href="#" id="footer_contact">Contact</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact Section -->
+      <div class="col-lg-5 col-md-12 footer_col">
+        <div class="footer_section footer_contact">
+          <div class="footer_title">Contact Us</div>
+          <div class="footer_contact_info">
+            <ul>
+              <li><i class="fa fa-user" aria-hidden="true"></i>Tuba Jabeen | Isha Eman</li>
+              <li><i class="fa fa-phone" aria-hidden="true"></i> +92-3345605064 | +92-3019575969</li>
+              <li><i class="fa fa-envelope" aria-hidden="true"></i> fa21-bcs-033@cuiatk.edu.pk |
+                fa21-bcs-046@cuiatk.edu.pk</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div> <!-- Close footer_row -->
+
+    <!-- Copyright Section -->
+    <div class="row">
+      <div class="col">
+        <div class="footer_copyright">
+          <p>&copy; 2025 PhysicsVerse. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+    <script>
+       
+
+        document.addEventListener('DOMContentLoaded', function () {
+        const backBtn = document.querySelector('.back-icon');
+
+        if (backBtn) {
+            backBtn.addEventListener('click', function () {
+                window.history.back(); // Go to previous page
+            });
+        }
+    });
+        document.addEventListener('DOMContentLoaded', () => {
+    const expForm = document.querySelector('.exp-form');
+    const studentForm = document.querySelector('.student-form');
+    const gradeSection = document.querySelector('.grade-section');
+    if (expForm && '<%= showStudentModal %>' !== 'true' && '<%= showGradeSection %>' !== 'true') {
+  expForm.classList.remove('hidden');
+  studentForm?.classList.add('hidden');
+  gradeSection?.classList.add('hidden');
+}
+        
+if ('<%= showStudentModal %>' === 'true') {
+  expForm?.classList.add('hidden');
+  studentForm?.classList.remove('hidden');
+  gradeSection?.classList.add('hidden');
+}
+
+if ('<%= showGradeSection %>' === 'true') {
+  expForm?.classList.add('hidden');
+  studentForm?.classList.add('hidden');
+  gradeSection?.classList.remove('hidden');
+}
+
+        function toggleRow(rowId) {
+    const row = document.getElementById(`row-${rowId}`);
+    const gradeInput = document.getElementById(`grade-${rowId.split('-')[0]}`);
+
+    if (row.classList.contains("green-row")) {
+        row.classList.remove("green-row");
+        row.classList.add("red-row");
+
+        // Subtract 5 from the grade
+        let currentGrade = parseInt(gradeInput.value, 10);
+        if (currentGrade > 0) {
+            gradeInput.value = Math.max(0, currentGrade - 5);
+        }
+    }
+}
+
+// function enableEdit(expId) {
+//     const gradeInput = document.getElementById(`grade-${expId}`);
+//     gradeInput.removeAttribute("readonly");
+//     gradeInput.focus();
+// }
+
+
+        function markError(rowId) {
+        let row = document.getElementById(`row-${rowId}`);
+        if (!row.classList.contains('row-red')) {
+            row.classList.add('row-red');
+            row.classList.remove('row-green');
+            let gradeInput = row.closest('table').querySelector(`#grade-${rowId.split('-')[0]}`);
+            if (gradeInput) {
+                let currentGrade = parseInt(gradeInput.value);
+                gradeInput.value = Math.max(0, currentGrade - 5);
+            }
+        }
+    }
+//     let submitBtn = document.getElementById(`submit-btn-${expId}`);
+// if (submitBtn) {
+//     submitBtn.disabled = false;
+// } else {
+//     console.log(`Submit button with ID submit-btn-${expId} not found`);
+// }
+
+const submittedExperiments = new Set();
+
+    function enableEdit(expId) {
+        const input = document.getElementById(`grade-${expId}`);
+        if (input) {
+            input.removeAttribute('readonly');
+            input.focus();
+        }
+
+        const submitBtn = document.getElementById(`submit-btn-${expId}`);
+        if (submitBtn) {
+            submitBtn.disabled = false;
+        }
+    }
+
+    function disableEdit(expId) {
+        if (submittedExperiments.has(expId)) {
+            alert("Grade already submitted for this experiment.");
+            return false; // Prevent duplicate submission
+        }
+
+        const input = document.getElementById(`grade-${expId}`);
+        const submitBtn = document.getElementById(`submit-btn-${expId}`);
+
+        if (input) input.setAttribute('readonly', true);
+        if (submitBtn) submitBtn.disabled = true;
+
+        // Mark this exp as submitted
+        submittedExperiments.add(expId);
+
+        return true; // Allow form submission
+    }});
+    </script>
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+</body>
+</html>

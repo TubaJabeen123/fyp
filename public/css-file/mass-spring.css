@@ -1,0 +1,775 @@
+
+html {
+  overflow: auto;
+  box-sizing: border-box;
+  /* overflow-y: auto; */
+  font-size: 62.5%;
+}
+
+@keyframes tooltipFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#tourContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6); 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  visibility: hidden; 
+  opacity: 0; 
+  transition: visibility 0.3s, opacity 0.3s; 
+}
+
+#tourContainer.active {
+  visibility: visible;
+  opacity: 1; 
+}
+
+#startTourBtn {
+  padding: 1.5rem 3rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+  background-color: #041f3d;
+  border: none;
+  border-radius: 1.5rem;
+  box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.3s;
+}
+
+#startTourBtn:hover {
+  background-color: #031121;
+  transform: scale(1.05); 
+}
+
+/* Add to mass-spring.css */
+.tooltip {
+  position: absolute;
+  background-color: #2d3748;
+  color: #f7fafc;
+  padding: 0.8rem 1.2rem;
+  border-radius: 0.6rem;
+  font-size: 1.4rem;
+  font-family: 'Arial', sans-serif;
+  box-shadow: 0 0.4rem 0.6rem rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  max-width: 22rem;
+  text-align: center;
+  line-height: 1.4;
+  /* transform: translateY(5px); */
+}
+
+/* Bottom position arrow */
+.tooltip.bottom::after {
+  content: "";
+  position: absolute;
+  top: -0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 0.5rem 0.5rem;
+  border-style: solid;
+  border-color: transparent transparent #2d3748 transparent;
+}
+
+.tooltip.active {
+  opacity: 1;
+ }
+
+.blur {
+  filter: blur(0.5rem);
+  pointer-events: none; 
+}
+/* Navigation Bar */
+.navigation-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4rem;
+  background-color: #333;
+  box-shadow: 0rem 0.5rem 2rem rgba(0, 0, 0, 0.05);
+  background: #112d42df; 
+  background-size: cover;
+  background-repeat: no-repeat;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -ms-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+  box-shadow: 0 -0.2rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+
+.home-button {
+  margin-left: 1.5rem;
+}
+
+.home-button img {
+  width: 2.4rem;
+  height: 2.4rem;
+}
+
+.tabs {
+  display: flex;
+  height: 100%;
+}
+
+.tab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+  height: 100%;
+  color: white;
+  text-decoration: none;
+  font-family: Arial, sans-serif;
+  font-size: 1.4rem;
+  transition: background-color 0.3s;
+}
+
+.tab:hover {
+  color: #acb0bb;
+}
+
+.tab.active {
+  color: #384158;
+  background: #14bdee;
+}
+
+
+.logo {
+  margin-right: 1.5rem;
+}
+
+.logo img {
+  height: 3rem;
+}
+
+
+ 
+ 
+ /* Body styles */
+ 
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    margin-bottom: 2rem;
+    margin-top: -0.75rem;
+    margin-left: 0;
+    margin-right: 0; 
+    padding: 0;
+    height: 100%;
+    overflow: auto;
+
+  }
+  .container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+  }
+/* .massInput {
+    position: absolute;
+    top: 0.5rem;
+    left: 30%;
+    transform: translateX(-50%);
+    display: flex;
+    width: 23%;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+     font-size: 1rem;
+  }
+  
+  .springInput {
+    position: absolute;
+    top: 0.5rem;
+    left: 70%;
+    transform: translateX(-50%);
+    display: flex;
+    width: 23%;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    font-size: 1rem;
+
+  } */
+
+
+  .massInput, .springInput {
+    position: absolute;
+    top: 0.5rem;
+    display: flex;
+    align-items: center;
+    width: 23%;
+    max-width: 20rem;
+    padding: 0.75rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    /* box-sizing: border-box; */
+  }
+  
+  .massInput {
+    left: 18%;
+  }
+  
+  .springInput {
+    left: auto;
+    right: 18%;
+  }
+  
+  /* Style the labels and spans */
+  .massInput label,
+  .springInput label,
+  .massInput span,
+  .springInput span {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  
+  /* Style the sliders */
+  input[type="range"] {
+    width: 90%;
+    appearance: none;
+    height: 0.4rem;
+    border-radius: 0.3rem;
+    background: #ddd;
+    outline: none;
+    transition: background 0.3s;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    background: #3498db;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  
+  input[type="range"]::-moz-range-thumb {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    background: #3498db;
+    cursor: pointer;
+  }
+  
+
+  #simulationCanvas {
+    display: block;
+    margin: 0;
+    background-color: #fdf6e3;
+  }
+
+  .controls {
+    width: 20%;
+    background-color: #e0e0e0;
+    padding: 1rem;
+    box-shadow: 0.2rem 0.2rem 1.2rem rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+  }
+  
+  canvas {
+    width: 100%;
+    height: auto;
+    background-color: #ffedf8d4;
+    display: block;
+    border: 0.1rem solid #000;
+    margin: 0 auto;
+  }
+  
+  .button-controls{
+    display: flex;
+    position: absolute;
+    bottom: 2rem;
+    right: 40%;
+    justify-content: center;
+    font-size: 1rem;
+  
+  }
+
+  .startBtn , #controlButton  {
+    padding: 1rem;
+    background-color: #111438f9;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin: 1rem;
+  }
+  .button-controls img {
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+  }
+  .startBtn:hover, .controlButton:hover {
+    background-color: #0056b3;
+  }
+  
+  .resetBtn {
+    color: white;
+    background-color: #730f19;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin: 1rem;
+
+  }
+  
+  .resetBtn:hover {
+    background-color: #c82333;
+  }
+
+  
+.gravity-container {
+    position: absolute;
+    right: 1%;
+    top: 5%;
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.1);
+    width: 13%;
+  }
+  
+  .gravity-container input[type="button"] {
+    background-color: #91bdf6;
+    font-size: 1.5rem;
+    color: #062446;
+    border: 0.05rem solid #0c3768;
+    padding: o.5rem;
+    border-radius: 0.5rem;
+  }
+  
+  .gravity-container label {
+    right: 5%;
+    top: 1rem;
+    color: #0b3e79;
+    font-size: 1.5rem;
+  }
+  
+  #gravity-control {
+    display: none;
+    margin-top: 1rem;
+
+  }
+  .input-group {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .limits {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    color: #555;
+  }
+  
+  .arrow-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .arrow-buttons button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 0.8rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .arrow-buttons button:hover {
+    background-color: #0056b3;
+  }
+  
+  input[type="range"] {
+    flex-grow: 1;
+  }
+  
+  .input-value {
+    margin-top: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+  }
+  
+  #gravityBtn.expanded {
+    background-color: red;
+    color: white;
+  }
+  
+  #gravitySelect {
+    padding: 0.5rem;
+    font-size: 1.4rem;
+    color: #062446;
+    border: 0.05rem solid #0c3768;
+    border-radius: 0.5rem;
+  }
+  
+  
+.playback-controls {
+    display: inline;
+    justify-content: center;
+    position: absolute;
+    bottom: 10%;
+    right: 0rem;
+    flex-direction: column;
+    width: auto;
+  }
+  
+  .playback-controls button {
+    background-color: #0056b3;
+    font-size: 1.2rem;
+    width: 5.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    padding: 1rem;
+  }
+  
+  .playback-controls button.active {
+    background-color: #a1caf7;
+    color: white;
+  }
+  
+  .canvasButton{
+    margin-top: 0rem;
+    top: 33%;
+    left: 1%;
+    position: absolute;
+    display: flex;
+    flex-direction: column;  
+    font-size: 1.2rem;
+
+  }
+ 
+  #addValuesBtn{
+    background-color: #61919f;
+    color: white;
+    padding: 1rem;
+    border: none;
+    margin: 0.2rem;
+    cursor: pointer;
+    border-radius: 1rem;
+  }
+     
+  .checkBoxex {
+    position: absolute;
+    top: 4rem;
+    left: 2rem;
+    display: block;
+  }
+  
+  .checkBoxex label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+
+  .weights {
+    position: absolute;
+    bottom: 9%;
+    left: 10%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .weight {
+    text-align: center;
+    border-radius: 0.5rem;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+  }
+  
+  #weight1 {
+    width: 5rem;
+    height: 3rem;
+    background-color: orange;
+  }
+  
+  #weight2 {
+    width: 5.5rem;
+    height: 8rem;
+    background-color: blue;
+  }
+  
+  #weight3 {
+    width: 5rem;
+    height: 6rem;
+    background-color: green;
+  }
+  
+  #weight4 {
+    width: 6rem;
+    height: 8rem;
+    background-color: red;
+  }
+  
+  #graphContainer {
+    width: 100%;
+    margin-bottom: 3rem;
+  }
+  
+  .graphContainer2 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  
+  .canvasParts {
+    width: 100%;
+    max-width: 38rem;
+    height: auto;
+    margin-bottom: 2rem;
+  }
+  #graphCanvas {
+    background-color: rgb(249, 244, 244);
+    width: 100%;
+    height: auto;
+  }
+  #tableContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  table {
+    width: 95%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    border: 0.1rem solid black;
+    margin-left: 1rem;
+  }
+  
+  th, td {
+    padding: 0.5rem;
+    border: 0.1rem solid #ddd;
+    text-align: center;
+    font-size: 1.2rem;
+    width: 50rem;
+  }
+  
+  th {
+    background-color: #aeabab;
+    font-weight: bold;
+  }
+  
+  table input{
+   font-size: 1.4rem;
+   width: 10rem;
+  }
+  
+  #saveInDB{
+    padding: 1.5rem;
+    background-color: #111438f9;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    align-self: center;
+    margin-left: 47%;
+    margin-bottom: 2rem;
+  }
+  
+  /* Stop watch =------------------------------------------*/
+  .stopwatch-container {
+    position: absolute;
+    top: 7rem;
+    left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(43, 82, 128, 0.838);
+    padding: 1.2rem;
+    border-radius: 2rem;
+    box-shadow: 0rem 1rem 2rem rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: 10rem;
+  }
+  
+  .stopwatch-container label{
+    color: white;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+  
+  .stopwatch-display {
+    width: 11.5rem;
+    text-align: center;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    /* padding: 10px; */
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border: 0.2rem solid #7c6862;
+    border-radius: 1rem;
+    background-color: #dddee0;
+    color: #0b0808;
+    box-shadow: inset 0rem 0rem 0.5rem rgba(0, 0, 0, 0.1);
+  }
+  
+  .buttons button{
+    cursor: pointer;
+    border: none;
+    color: white;
+    border-radius: 50%;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: inline;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 0.4rem 0.8rem rgba(0, 0, 0, 0.15);
+  }
+  
+  .buttons button:hover {
+    background-color: #79aaf9;
+    transform: scale(1.05);
+  }
+  
+  .buttons button:disabled {
+    background-color: #f9f2f2;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+  
+  .buttons i {
+    font-size: 1.2rem;
+    pointer-events: none;
+  }
+  
+  #start-btn {
+    background-color: #4caf50;
+  }
+  
+  #pause-resume-btn {
+    background-color: #ff9800;
+  }
+  
+  #reset-btn {
+    background-color: #f44336;
+  }
+  
+  #start-btn:hover {
+    background-color: #6cdc72;
+  }
+  
+  #pause-resume-btn:hover {
+    background-color: #f5c080;
+  }
+  
+  #reset-btn:hover {
+    background-color: #f87673;
+  }
+  
+  /* Extra Large Devices (Desktop, > 1200px) */
+@media (min-width: 1200px) {
+  html {
+    font-size: 60%; 
+  }
+}
+
+/* Large Devices (Laptop, 998px to 1200px) */
+@media (max-width: 1200px) and (min-width: 998px) {
+  html {
+    font-size: 60%;
+  }
+}
+
+/* Medium Devices (Tablet, 768px to 998px) */
+@media (max-width: 998px) and (min-width: 770px) {
+  html {
+    font-size: 45%;
+  }
+}
+
+@media (max-width: 770px) and (min-width: 220px) {
+  html {
+    font-size: 30%;
+  }
+ 
+
+  .stopwatch-container, .stopwatch-display {
+    top: auto;
+    width: 40%;
+    position: relative;
+    margin: 1rem auto;
+    font-size: 1.5rem;
+  }
+  .canvasButton{
+    margin: 1rem;
+    right: auto;
+    top: auto;
+    width: auto;
+    position: relative;
+    display: flex;
+    flex-direction: row;  
+    font-size: 0.8rem;
+  }
+.weights{
+overflow-x: auto;
+left: auto;
+}
+
+table{
+width: 95%;
+overflow-x: auto;
+margin-left: 2rem;
+
+}
+th,td{
+  font-size: 0.9rem;
+}
+
+table input{
+  font-size: 1rem;
+  width: 5rem;
+
+ }
+ 
+}

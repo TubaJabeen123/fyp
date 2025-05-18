@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gravesand's Apparatus Simulation</title>
+  <link rel="stylesheet" href="/css-file/grav.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <link rel="stylesheet" href="/css-file/model.css" />
+
+</head>
+
+<body>
+  <!-- Completely Isolated Modal (no Bootstrap, no external dependencies) -->
+  <div id="isolatedModal">
+    <div id="modalOverlay"></div>
+    <div id="modalContent">
+      <div id="modalHeader">
+        <div id="modalTitle">
+          <i class="fas fa-balance-scale"></i>
+          Experiment Details
+        </div>
+        <button id="closeModalBtn">&times;</button>
+      </div>
+      <div id="modalBody">
+        <div class="experiment-title">
+          <h2>🔍 Experiment Title:</h2>
+          <h3>To Find the Unknown Weight of a Body using Rectangular Components of Forces</h3>
+        </div>
+        
+        <div class="experiment-section">
+          <h4><i class="fas fa-bullseye"></i> 🎯 Learning Objectives:</h4>
+          <ul class="objectives-list">
+            <li>Understand the concept of force resolution into rectangular components.</li>
+            <li>Learn to apply vector addition of forces in equilibrium.</li>
+            <li>Experimentally determine an unknown weight using force balancing.</li>
+            <li>Use a Gravesand's apparatus to visualize the equilibrium of concurrent forces.</li>
+          </ul>
+        </div>
+        
+        <div class="experiment-section">
+          <h4><i class="fas fa-tools"></i> 🛠️ How to Perform the Experiment:</h4>
+          <div class="procedure-steps">
+            <div class="procedure-step">
+              <h5>1. Setup:</h5>
+              <p>Place the Gravesand's apparatus on a smooth, horizontal surface vertically upright.</p>
+            </div>
+            
+            <div class="procedure-step">
+              <h5>2. Prepare Threads and Load:</h5>
+              <p>Tie three threads at one end. Attach hangers with known weights on two ends and a bob of unknown weight on the third.</p>
+            </div>
+            
+            <div class="procedure-step">
+              <h5>3. Mount Threads:</h5>
+              <p>Pass the threads over frictionless pulleys, adjusting weights so the central knot stays near the paper center.</p>
+            </div>
+            
+            <div class="procedure-step">
+              <h5>4. Mark Lines:</h5>
+              <p>Place a plane mirror under each thread and mark their positions on a white paper sheet.</p>
+            </div>
+            
+            <div class="procedure-step">
+              <h5>5. Draw Force Lines:</h5>
+              <p>Remove the sheet and draw lines from the knot point representing each thread's direction.</p>
+            </div>
+            
+            <div class="procedure-step">
+              <h5>6. Measurement:</h5>
+              <p>Measure weights of hangers and bob using a spring balance.</p>
+            </div>
+            
+            <div class="procedure-step">
+              <h5>7. Graphical Force Resolution:</h5>
+              <p>Use a chosen scale to represent forces as vectors and resolve known forces into components.</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="experiment-section">
+          <h4><i class="fas fa-check-circle"></i> ✅ What You Will Learn:</h4>
+          <ul class="outcomes-list">
+            <li>How forces can be represented as vectors and resolved into components.</li>
+            <li>Practical use of vector triangle and parallelogram laws in force analysis.</li>
+            <li>Graphical technique to find unknown forces (weights) using component vectors.</li>
+            <li>Application of equilibrium conditions to a system of concurrent forces.</li>
+          </ul>
+        </div>
+      </div>
+      <div id="modalFooter">
+        <button id="startExperimentBtn">Start Experiment</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Show modal button (fixed position) -->
+  <button id="showModalBtn" title="Show Experiment Information">
+    <i class="fas fa-info-circle"></i>
+  </button>
+  <div class="container">
+    <div id="exp-container" class="exp-container">
+      <canvas id="expCanvas" width="600" height="300"></canvas>
+    </div>
+
+    <div class="controls">
+      <div class="input-group">
+        <label for="weightP">Weight P (g): </label>
+        <div class="limits">
+          <span>5</span>
+          <span>250</span>
+        </div>
+        <div class="arrow-buttons">
+          <button id="weightP-decrease">◄</button>
+          <input type="range" id="weightP" min="5" max="250" step="5" value="50" />
+          <button id="weightP-increase">►</button>
+        </div>
+        <div class="input-value" id="weightP-value">50 g</div>
+      </div>
+
+      <div class="input-group">
+        <label for="weightQ">Weight Q (g): </label>
+        <div class="limits">
+          <span>5</span>
+          <span>250</span>
+        </div>
+        <div class="arrow-buttons">
+          <button id="weightQ-decrease">◄</button>
+          <input type="range" id="weightQ" min="5" max="250" step="5" value="30" />
+          <button id="weightQ-increase">►</button>
+        </div>
+        <div class="input-value" id="weightQ-value">30 g</div>
+        </div>
+
+        <div class="input-group">
+        <label for="verticalLength">Vertical String Length:</label>
+          <div class="limits">
+            <span>30</span>
+            <span>150</span>
+          </div>
+          <div class="arrow-buttons">
+            <button id="VL-decrease">◄</button>
+            <input type="range" id="verticalLength" min="30" max="150" step="1" value="60" />
+            <button id="VL-increase">►</button>
+          </div>
+          <div class="input-value" id="VL-value">30</div>
+          </div>
+        
+          <div class="input-group">
+            <label for="unknownWeight">Unknown Weight (g): </label>
+            <div class="limits">
+              <span>10</span>
+              <span>250</span>
+            </div>
+            <div class="arrow-buttons">
+              <button id="unknownWeight-decrease">◄</button>
+              <input type="range" id="unknownWeight" min="10" max="250" step="5" value="100" />
+              <button id="unknownWeight-increase">►</button>
+            </div>
+            <div class="input-value" id="unknownWeight-value">100 g</div>
+          </div>
+
+        
+    </div>
+  </div>
+
+    <div id="graphContainer">
+        <canvas id="AngleWeighGraph" ></canvas>
+        <div class="output-container">
+          Output:
+          <div class="weight-display">
+            Weight W: <span id="weightW">0.00 g</span>
+          </div>
+  
+          <div class="weight-display">
+            Error: <span id="weightError">0.00 g</span>
+          </div>
+          <div class="canvasButton">
+            <button id="showValuesBtn">Show Values</button>
+          </div>
+        </div>
+    </div>
+
+<div id="tableContainer" style="display: none;">
+  <form action="/exp/forceExp" method="post">
+      <table>
+          <thead>
+              <tr>
+                <th>Sr No.</th>
+                  <th>Force P (g)</th>
+                  <th>Force Q (g)</th>
+                  <th>θ1 (angle with P's string)</th>
+                  <th>θ2 (angle with Q's string)</th>
+                  <th>P sin θ1</th>
+                  <th>Q sin θ2</th>
+                  <th>Weight of unknown mass (g)</th>
+                  <th>Error (g)</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                <tr>
+                  <td>1</td>
+                  <td><input type="text" id="weightP1" name="weightP1" value="" /></td>
+                  <td><input type="text" id="weightQ1" name="weightQ1" value="" /></td>
+                  <td><input type="text" id="angleP1" name="angleP1" value="" /></td>
+                  <td><input type="text" id="angleQ1" name="angleQ1" value="" /></td>
+                  <td><input type="text" id="PsinAngleP1" name="PsinAngleP1" value="" /></td>
+                  <td><input type="text" id="QsinAngleQ1" name="QsinAngleQ1" value="" /></td>
+                  <td><input type="text" id="weightW1" name="weightW1" value="" /></td>
+                  <td><input type="text" id="weightError1" name="weightError1" value="" /></td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td><input type="text" id="weightP2" name="weightP2" value="" /></td>
+                  <td><input type="text" id="weightQ2" name="weightQ2" value="" /></td>
+                  <td><input type="text" id="angleP2" name="angleP2" value="" /></td>
+                  <td><input type="text" id="angleQ2" name="angleQ2" value="" /></td>
+                  <td><input type="text" id="PsinAngleP2" name="PsinAngleP2" value="" /></td>
+                  <td><input type="text" id="QsinAngleQ2" name="QsinAngleQ2" value="" /></td>
+                  <td><input type="text" id="weightW2" name="weightW2" value="" /></td>
+                  <td><input type="text" id="weightError2" name="weightError2" value="" /></td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td><input type="text" id="weightP3" name="weightP3" value="" /></td>
+                  <td><input type="text" id="weightQ3" name="weightQ3" value="" /></td>
+                  <td><input type="text" id="angleP3" name="angleP3" value="" /></td>
+                  <td><input type="text" id="angleQ3" name="angleQ3" value="" /></td>
+                  <td><input type="text" id="PsinAngleP3" name="PsinAngleP3" value="" /></td>
+                  <td><input type="text" id="QsinAngleQ3" name="QsinAngleQ3" value="" /></td>
+                  <td><input type="text" id="weightW3" name="weightW3" value="" /></td>
+                  <td><input type="text" id="weightError3" name="weightError3" value="" /></td>
+                </tr>
+                
+          </tbody>
+      </table>
+      <button id="saveInDB" >Save Data</button>
+      </form>
+  </div>
+  <div class="navigation-bar">
+    <div class="home-button">
+      <a href="/home"><img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTMgOWw5LTcgOSA3djExYTIgMiAwIDAgMS0yIDJINWEyIDIgMCAwIDEtMi0yeiI+PC9wYXRoPjxwb2x5bGluZSBwb2ludHM9IjkgMjIgOSAxMiAxNSAxMiAxNSAyMiI+PC9wb2x5bGluZT48L3N2Zz4=" alt="Home" /></a>
+    </div>
+    <div class="tabs">
+      <a href="/exp/forceExp" class="tab active" data-section="intro">Custom</a>
+      <a href="/guided/forceExp" class="tab" data-section="balance-lab">Guided Lab</a>
+      <a href="/resource/4" class="tab" data-section="game">Resources</a>
+    </div>
+    <div class="phet-logo">
+      <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgNjAiPgogIDx0ZXh0IHg9IjEwIiB5PSI0MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjMwIiBmb250LXdlaWdodD0iYm9sZCIgZmlsbD0id2hpdGUiPlBoRVQ8L3RleHQ+Cjwvc3ZnPg==" alt="PhET" />
+    </div>
+  </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/js/grav.js"></script>
+
+  <!-- Isolated Modal Control Script -->
+  <script>
+    // Wait for DOM to be fully loaded
+    document.addEventListener('DOMContentLoaded', function() {
+      // Get modal elements
+      const modal = document.getElementById('isolatedModal');
+      const modalOverlay = document.getElementById('modalOverlay');
+      const closeBtn = document.getElementById('closeModalBtn');
+      const startBtn = document.getElementById('startExperimentBtn');
+      const showModalBtn = document.getElementById('showModalBtn');
+      
+      // Function to open modal
+      function openModal() {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+      }
+      
+      // Function to close modal
+      function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+      }
+      
+      // Show modal on page load
+      openModal();
+      
+      // Event listeners
+      closeBtn.addEventListener('click', closeModal);
+      startBtn.addEventListener('click', closeModal);
+      modalOverlay.addEventListener('click', closeModal);
+      showModalBtn.addEventListener('click', openModal);
+      
+      // Prevent clicks inside modal content from closing the modal
+      document.getElementById('modalContent').addEventListener('click', function(e) {
+        e.stopPropagation();
+      });
+    });
+  </script>
+</body>
+
+</html>
