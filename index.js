@@ -13,33 +13,33 @@ const bodyParser = require('body-parser');
 
 
 const {getTokenFromCookies
-} =require('../config/tchr');
-const { connectToMongoBb } = require("../connection");
+} =require('./config/tchr');
+const { connectToMongoBb } = require("./connection");
 
 // router imports 
 
-const tchrRoute=require('../routes/tchr');
-const stdRoute=require('../routes/std');
-const expRoute=require('../routes/exp');
-const tchrQUiz=require('../routes/tchrQuiz');
-const stdQuiz=require('../routes/stdQuiz');
-const guidedRoute=require('../routes/guidedExp')
-const classRoom=require('../routes/classroom')
-const stdClass=require('../routes/classStd');
-const stdRes=require('../routes/learningStd');
-const expRes=require('../routes/expResult');
-const stdRes1=require('../routes/stdResult');
-const tchrUpload=require('../routes/learning');
+const tchrRoute=require('./routes/tchr');
+const stdRoute=require('./routes/std');
+const expRoute=require('./routes/exp');
+const tchrQUiz=require('./routes/tchrQuiz');
+const stdQuiz=require('./routes/stdQuiz');
+const guidedRoute=require('./routes/guidedExp')
+const classRoom=require('./routes/classroom')
+const stdClass=require('./routes/classStd');
+const stdRes=require('./routes/learningStd');
+const expRes=require('./routes/expResult');
+const stdRes1=require('./routes/stdResult');
+const tchrUpload=require('./routes/learning');
 // Model Imports 
-const {handleProfile}=require('../Controller/std');
-const {handleProfileTchr}=require('../Controller/tchr');
-const LearningMaterial=require('../Model/learning');
+const {handleProfile}=require('./Controller/std');
+const {handleProfileTchr}=require('./Controller/tchr');
+const LearningMaterial=require('./Model/learning');
 const cookieParser = require('cookie-parser');
 const http = require('http');
 const socketio = require('socket.io');
 const server = http.createServer(app);
 const io = socketio(server);
-const Community = require('../Model/community');
+const Community = require('./Model/community');
 
 io.on('connection', (socket) => {
   console.log('User connected:', socket.id);
