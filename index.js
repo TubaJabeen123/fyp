@@ -95,7 +95,7 @@ app.use(cookieParser());
 // app.use(bodyParser.urlencoded({ extended: true })); // For URL-encoded form submissions
 // app.use(bodyParser.json()); // For JSON bodies
   // Connect to MongoDB
-  connectToMongoBb("mongodb://127.0.0.1:27017/fyp")
+connectToMongoBb(process.env.MONGO_URI)
     .then(() => {
       console.log("MongoDB connected");
     })

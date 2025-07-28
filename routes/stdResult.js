@@ -4,7 +4,7 @@ const QuizResult = require('../Model/QuizResult'); // Adjust path if needed
 const ExpResult = require('../Model/expResult.'); // Adjust path if needed
 const { getTokenFromCookies } = require('../config/tchr');  
 
-const mongoose=require('mongoose');
+const mongoose=require('oose');
 function isAuthenticated(req, res, next) {
   console.log('Cookies in request:', req.cookies);
 
