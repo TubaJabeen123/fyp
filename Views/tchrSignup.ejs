@@ -201,28 +201,28 @@ padding-left: 10px;
                                     </select>
                                   </div>
                                   <div class="group">
-                                    <label for="pwd" class="label">Password</label>
+                                    <label for="signup_pwd" class="label">Password</label>
                                     <div class="input-container">
-                                        <input id="pwd" name="pwd" type="password" 
+                                        <input id="signup_pwd" name="signup_pwd" type="password" 
                                             class="input form-control <% if (typeof signupErrors !== 'undefined' && signupErrors.confirm_pwd) { %> is-invalid <% } %>" 
                                             placeholder="Enter your password">
                                         <i class="toggle-password fa fa-eye" style="color: black;"></i>
                                     </div>
-                                    <% if (typeof signupErrors !== 'undefined' && signupErrors.pwd) { %>
-                                        <div class="error-text"><%= signupErrors.pwd %></div>
+                                    <% if (typeof signupErrors !== 'undefined' && signupErrors.signup_pwd) { %>
+                                        <div class="error-text"><%= signupErrors.signup_pwd %></div>
                                     <% } %>
                                 </div>
                                 
                                 <div class="group">
-                                    <label for="confirm_pwd" class="label">Repeat Password</label>
+                                    <label for="signup_confirm_pwd" class="label">Repeat Password</label>
                                     <div class="input-container">
-                                        <input id="confirm_pwd" name="confirm_pwd" type="password" 
-                                            class="input form-control <% if (typeof signupErrors !== 'undefined' && signupErrors.confirm_pwd) { %> is-invalid <% } %>" 
+                                        <input id="signup_confirm_pwd" name="signup_confirm_pwd" type="password" 
+                                            class="input form-control <% if (typeof signupErrors !== 'undefined' && signupErrors.signup_confirm_pwd) { %> is-invalid <% } %>" 
                                             placeholder="Repeat your password">
                                         <i class="toggle-password fa fa-eye" style="color: black;"></i>
                                     </div>
-                                    <% if (typeof signupErrors !== 'undefined' && signupErrors.confirm_pwd) { %>
-                                        <div class="error-text"><%= signupErrors.confirm_pwd %></div>
+                                    <% if (typeof signupErrors !== 'undefined' && signupErrors.signup_confirm_pwd) { %>
+                                        <div class="error-text"><%= signupErrors.signup_confirm_pwd %></div>
                                     <% } %>
                                 </div>
 

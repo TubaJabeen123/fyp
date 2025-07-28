@@ -10,8 +10,14 @@ const Community=require('../Model/community.js');
 const {    addUserToCommunity}=require('../Controller/community');
 async function handleSignup(req,res){
     try {
-        const { fname, lname, email, pwd, confirm_pwd } = req.body;
+        
+
+        const { fname, lname, email, signup_pwd, signup_confirm_pwd } = req.body;
+
         console.log(req.body)
+         console.log("🧪 pwd:", JSON.stringify(signup_pwd));
+        console.log("🧪 confirm_pwd:", JSON.stringify(signup_confirm_pwd));
+        console.log("🧪 Match:", signup_pwd === signup_confirm_pwd);
         let signupError = {};  
       let  loginError={}; 
         // Validate fields
@@ -29,7 +35,7 @@ async function handleSignup(req,res){
         
         // Validate Last Name
         if (validator.isEmpty(lname)) {
-            signupErrors.lname = "Last name is required";
+            signupError.lname = "Last name is required";
         } else if (!nameRegex.test(lname)) {
             signupError.lname = "Last name must contain only letters, spaces, hyphens or apostrophes";
         } else if (repeatedCharRegex.test(lname.trim())) {
@@ -37,11 +43,11 @@ async function handleSignup(req,res){
         }
         
         if (!validator.isEmail(email)) signupError.email = "Please enter a valid email address";
-        if (!validator.isLength(pwd, { min: 8 }) || !validator.isStrongPassword(pwd)) {
-            signupError.pwd = "Password must be at least 8 characters, with one uppercase letter, one number, and one special character.";
+        if (!validator.isLength(signup_pwd, { min: 8 }) || !validator.isStrongPassword(signup_pwd)) {
+            signupError.signup_pwd = "Password must be at least 8 characters, with one uppercase letter, one number, and one special character.";
         }
 
-        if (pwd !== confirm_pwd) signupError.confirm_pwd = "Passwords do not match";
+        if (signup_pwd !== signup_confirm_pwd) signupError.signup_confirm_pwd = "Passwords do not match";
     
         // Check if the user already exists
         const existingUser = await User.findOne({ email });
@@ -57,7 +63,7 @@ async function handleSignup(req,res){
         if (req.file) {
             pic = req.file.buffer.toString('base64');}    
         // Hash the password and create the new user
-        const hashedPassword = await bcrypt.hash(pwd, 10);
+        const hashedPassword = await bcrypt.hash(signup_pwd, 10);
         const verficationToken= Math.floor(100000 + Math.random() * 900000).toString()
 
         const newTchr = new User({

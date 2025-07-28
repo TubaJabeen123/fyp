@@ -1,6 +1,7 @@
 // import { createRequire } from 'module';
 // const require = createRequire(import.meta.url);
 const jwt=require('jsonwebtoken');
+require('dotenv').config();
 
 
 const express=require('express');
@@ -95,7 +96,7 @@ app.use(cookieParser());
 // app.use(bodyParser.urlencoded({ extended: true })); // For URL-encoded form submissions
 // app.use(bodyParser.json()); // For JSON bodies
   // Connect to MongoDB
-connectToMongoBb(process.env.MONGO_URI)
+connectToMongoBb(process.env.DB_URL)
     .then(() => {
       console.log("MongoDB connected");
     })

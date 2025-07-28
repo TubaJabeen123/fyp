@@ -10,7 +10,7 @@ const Community=require('../Model/community.js');
 const {    addUserToCommunity}=require('../Controller/community');
 async function handleSignup(req,res){
     try {
-        const { fname, lname, email, role, pwd, confirm_pwd } = req.body;
+        const { fname, lname, email, role, signup_pwd, signup_confirm_pwd } = req.body;
         console.log(req.body)
         let signupErrors = {};  
       let  loginErrors={}; 
@@ -35,7 +35,7 @@ if (validator.isEmpty(lname)) {
     signupErrors.lname = "Last name cannot be made of a single repeated letter";
 }
 
-        if (pwd !== confirm_pwd) signupErrors.confirm_pwd = "Passwords do not match";
+        if (signup_pwd !== signup_confirm_pwd) signupErrors.signup_confirm_pwd = "Passwords do not match";
     
         // Check if the user already exists
         const existingUser = await User_Tchr.findOne({ email });
@@ -50,7 +50,7 @@ if (validator.isEmpty(lname)) {
         if (req.file) {
             pic = req.file.buffer.toString('base64');}    
         // Hash the password and create the new user
-        const hashedPassword = await bcrypt.hash(pwd, 10);
+        const hashedPassword = await bcrypt.hash(signup_pwd, 10);
         const verficationToken= Math.floor(100000 + Math.random() * 900000).toString()
 
         const newTchr = new User_Tchr({
