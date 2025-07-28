@@ -615,7 +615,7 @@ header
     width: 100%;
   }
   .header-area {
-    background-color: #f7f7f7;
+    background-color: #f7f7f79e;
     padding: 0px 15px;
     height: 100px;
     box-shadow: none;
@@ -665,7 +665,7 @@ header
     color: #191a20 !important;
   }
   .header-area .main-nav .nav li a:hover {
-    background: #eee !important;
+    background: #eeeeeeb0 !important;
     /* color: #f5a425!important; */
   color: #5f54f9!important ;
 
@@ -729,9 +729,9 @@ banner
 
 #bg-video {
     min-width: 100%;
-    min-height: 100vh;
+    min-height: 150vh;
     max-width: 100%;
-    max-height: 100vh;
+    max-height: auto;
     object-fit: cover;
     z-index: -1;
 }
@@ -781,7 +781,6 @@ services
 */
 
 .services {
-  margin-top: -335px;
   position: relative;
   width: 100%;
 }
@@ -801,14 +800,14 @@ services
 }
 
 .services .item .icon {
-  max-width: 60px;
+  max-width: 40px;
   margin: 0 auto;
 }
 
 .services .item h4 {
   margin-top: 25px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 400;
   font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 
   color: #c2c2b9;
@@ -821,7 +820,7 @@ services
 /* Services section with transparent background to show existing page background */
 .services {
   width: 100%;
-  padding: 50px 0;
+  padding: 20px 0;
   background: transparent; /* Completely transparent to show existing background */
 }
 
@@ -852,6 +851,7 @@ services
   transition: all 0.3s ease;
   backdrop-filter: blur(5px); /* Adds a slight blur effect behind the items */
   -webkit-backdrop-filter: blur(5px); /* For Safari support */
+  height: 250px;
 }
 
 .services-grid .item:hover {

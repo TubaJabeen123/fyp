@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 const validator = require('validator');
 const User_Tchr = require('../Model/tchr');
 const { sendVerificationEmail, sendWelcomeEmail,  sendVerificationEmail_reset,

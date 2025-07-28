@@ -7,7 +7,7 @@ let gfs;
 let storage;
 
 // MongoDB Connection
-connectToMongoBb(process.env.MONGODB_URI)
+connectToMongoBb("mongodb://127.0.0.1:27017/fyp")
   .then((conn) => {
     console.log("MongoDB connected");
 

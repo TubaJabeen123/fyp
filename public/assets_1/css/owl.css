@@ -200,8 +200,11 @@
 
 .video-overlay .Home {
   width: 80%;
+  margin: 0 auto; /* horizontally centers the div */
   text-align: center;
-  margin-bottom: 200px;
+  align-items: center;
+  margin-top: 50vh;
+  margin-bottom: 20px;
 }
 
 /* Heading styles */
