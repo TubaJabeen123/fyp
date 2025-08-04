@@ -72,36 +72,45 @@ function setupOptionListeners() {
   }
   
 
-function startQuizCreation() {
+  function startQuizCreation() {
     experimentNo = document.getElementById("exp_no").value;
     experimentTitle = document.getElementById("exp_title").value;
     const totalQuestionsInput = document.getElementById("total_questions").value;
-    assignedTo=document.getElementById('access').value;
-    classId=document.getElementById('classId').value;
+    assignedTo = document.getElementById('access').value;
+
+    // ✅ Only get classId if access is "class"
+    if (assignedTo === "class") {
+        const classIdInput = document.getElementById("classId");
+        classId = classIdInput ? classIdInput.value : '';
+    } else {
+        classId = ''; // or null
+    }
+
     console.log("Experiment No:", experimentNo);
     console.log("Experiment Title:", experimentTitle);
     console.log("Total Questions:", totalQuestionsInput);
-    console.log("assigned to:", assignedTo);
-    console.log("class Id :", classId);
+    console.log("Assigned to:", assignedTo);
+    console.log("Class ID:", classId);
+
     if (!experimentNo || !experimentTitle || isNaN(totalQuestionsInput)) {
         alert("Please fill out all required fields!");
         return;
     }
+
     totalQuestions = parseInt(totalQuestionsInput);
 
-    // Copy data to hidden fields
-//    exp_no= document.getElementById("hidden_exp_no");
-//     exp_title=document.getElementById("hidden_exp_title");
-//     //  = experimentTitle;
-//     totalQuestion_1=document.getElementById("hidden_total_questions")
-exp_no=experimentNo;
-exp_title=experimentTitle;
-totalQuestion_1=totalQuestions;
+    exp_no = experimentNo;
+    exp_title = experimentTitle;
+    totalQuestion_1 = totalQuestions;
+
     document.getElementById('questionModal').style.display = 'none';
     document.getElementById('questionNumberForm').style.display = 'none';
     document.getElementById('quizForm').style.display = 'block';
     showQuestionForm();
 }
+
+
+
 function showQuestionForm() {
     const form = document.getElementById("quizQuestionForm")
     form.innerHTML = "" // Clear previous content
@@ -187,152 +196,6 @@ function showQuestionForm() {
       `
     }
   }
-
-
-
-
-
-// function validateAndAutoPrefixAnswer(input) {
-//     const answer = input.value.trim().toLowerCase();
-  
-//     const options = [
-//       document.getElementById("option1").value.trim(),
-//       document.getElementById("option2").value.trim(),
-//       document.getElementById("option3").value.trim(),
-//       document.getElementById("option4").value.trim()
-//     ];
-  
-//     const labels = ["A", "B", "C", "D"];
-//     let matched = false;
-  
-//     for (let i = 0; i < options.length; i++) {
-//       const optionText = options[i].toLowerCase().replace(/^[a-d]:\s*/i, '');
-//       const answerText = answer.replace(/^[a-d]:\s*/i, '');
-  
-//       if (answerText === optionText) {
-//         input.value = `${labels[i]}: ${optionText}`;
-//         matched = true;
-//         break;
-//       }
-//     }
-  
-//     if (!matched) {
-//       throw new ValidationError("❌ Answer does not match any of the provided options.");
-//     }
-//   }
-//   function findDuplicateOption() {
-//     const options = [
-//       document.getElementById("option1").value.trim().toLowerCase(),
-//       document.getElementById("option2").value.trim().toLowerCase(),
-//       document.getElementById("option3").value.trim().toLowerCase(),
-//       document.getElementById("option4").value.trim().toLowerCase()
-//     ];
-  
-//     const uniqueOptions = new Set();
-  
-//     for (let option of options) {
-//       if (uniqueOptions.has(option)) {
-//         throw new ValidationError("❌ Duplicate option found!");
-//       }
-//       uniqueOptions.add(option);
-//     }
-//   }
-
-// function validateQuestionAndAnswer() {
-//     if (!validateCurrentQuestion()) {
-//         return; // Stop if options are invalid
-//     }
-//     validateAndAutoPrefixAnswer(document.getElementById('answer'));
-// }
-
-// function validateAndAutoPrefixAnswer(input) {
-//     const answerElement = document.getElementById(`answer${currentQuestion}`);
-//     if (!answerElement) {
-//       console.warn(`Answer input with id="answer${currentQuestion}" not found`);
-//       return;
-//     }
-    
-//     const answer = answerElement.value.trim();
-    
-  
-//     const options = [
-//         document.getElementById("option1").value.trim().toLowerCase(),
-//         document.getElementById("option2").value.trim().toLowerCase(),
-//         document.getElementById("option3").value.trim().toLowerCase(),
-//         document.getElementById("option4").value.trim().toLowerCase()
-//     ];
-//     console.log('Options during answer validation:', options);
-
-//     const labels = ["A", "B", "C", "D"];
-//     let matched = false;
-
-//     for (let i = 0; i < options.length; i++) {
-//         const parts = options[i].split(':');
-//         const optionText = parts.length > 1 ? parts.slice(1).join(':').trim().toLowerCase() : options[i].trim();
-
-//         if (answer === optionText) {
-//             input.value = `${labels[i]}: ${optionText}`;
-//             matched = true;
-//             break;
-//         }
-//     }
-
-//     if (!matched) {
-//         alert("❌ Answer does not match any of the provided options.");
-//         input.value = ""; // Clear wrong input
-//         input.focus();    // Focus again
-//     }
-// }
-
-// function validateAndAutoPrefixAnswer(input) {
-//     const answer = input.value.trim().toLowerCase();
-
-//     const options = [
-//         document.getElementById("option1").value.trim().toLowerCase(),
-//         document.getElementById("option2").value.trim().toLowerCase(),
-//         document.getElementById("option3").value.trim().toLowerCase(),
-//         document.getElementById("option4").value.trim().toLowerCase()
-//     ];
-//     console.log('Options during answer validation:', options);
-
-//     const labels = ["A", "B", "C", "D"];
-//     let matched = false;
-
-//     for (let i = 0; i < options.length; i++) {
-//         const parts = options[i].split(':');
-//         const optionText = parts.length > 1 ? parts.slice(1).join(':').trim().toLowerCase() : options[i].trim();
-
-//         if (answer === optionText) {
-//             input.value = `${labels[i]}: ${optionText}`;
-//             matched = true;
-//             break;
-//         }
-//     }
-
-//     if (!matched) {
-//         alert("❌ Answer does not match any of the provided options.");
-//         input.value = ""; // Clear wrong input
-//         input.focus();    // Focus again
-//     }
-// }
-// Add prefix like "A: " automatically if not already present
-// Add event listeners when the page loads
-// document.addEventListener("DOMContentLoaded", () => {
-//   const option1 = document.getElementById("option1")
-//   const option2 = document.getElementById("option2")
-//   const option3 = document.getElementById("option3")
-//   const option4 = document.getElementById("option4")
-
-//   if (option1) option1.addEventListener("input", updateOptionLabels)
-//   if (option2) option2.addEventListener("input", updateOptionLabels)
-//   if (option3) option3.addEventListener("input", updateOptionLabels)
-//   if (option4) option4.addEventListener("input", updateOptionLabels)
-
-//   // Initial update if all options exist
-//   if (option1 && option2 && option3 && option4) {
-//     updateOptionLabels()
-//   }
-// })
 
 
 function addPrefix(inputElement, prefix) {
