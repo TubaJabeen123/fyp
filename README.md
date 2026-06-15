@@ -2,6 +2,8 @@
 
 **PhysicsVerse** is a web-based virtual lab designed to simulate real-world physics experiments in an engaging and educational digital environment. This system allows both **students and teachers** to perform, observe, analyze, and assess physics experiments virtually — anywhere, anytime.
 
+🌐 Live Demo: https://fyp-flax-three.vercel.app/
+
 > 🚀 Final Year Project (BSCS 2021–2025)
 > COMSATS University Islamabad, Attock Campus
 
