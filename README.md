@@ -134,6 +134,12 @@ Then open [http://localhost:5013](http://localhost:5013) in your browser.
 ![alt text](image-1.png)
 ---
 
+## 🎥 Project Demonstration
+
+▶ [Watch Demo Video](fyp(1).mp4)
+
+This video demonstrates the complete workflow of the application, including user authentication, core features, and system functionality.
+
 ## 👨‍💻 Authors
 
 * **Tuba Jabeen** — [FA21-BCS-033](mailto:fa21-bcs-033@cuiatk.edu.pk)
